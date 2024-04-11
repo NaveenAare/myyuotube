@@ -1,4 +1,4 @@
-# Use an official Python runtime as a base image
+# Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
 # Set the working directory in the container
@@ -7,18 +7,18 @@ WORKDIR /usr/src/app
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && \
-    rm -rf /var/lib/apt/lists/* && \
-    # Add user to run the application
-    useradd -m myuser
+# Install ffmpeg
+RUN apt-get update && apt-get install -y ffmpeg && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Switch to non-root user
-USER myuser
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
 
-# Run your application
-CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", "--bind", "0.0.0.0:8080", "app:application"]
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD ["gunicorn", "--workers=3", "--bind", "0.0.0.0:8080", "app:application"]
 
