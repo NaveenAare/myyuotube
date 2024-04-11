@@ -10,5 +10,6 @@ python-dateutil==2.9.0.post0
 pytube==15.0.0
 pytz==2024.1
 yt-dlp
+ffmpeg
 
 

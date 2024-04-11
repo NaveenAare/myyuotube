@@ -14,6 +14,7 @@ import re
 import time
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
+import subprocess
 
 
 
@@ -252,6 +253,23 @@ def dowload_age_restricted_videos(url, format_id, output_filename):
 #download_video(url, "kgf.mp4")
 
 
+
+def dowloadTrimmedVideo(start_time, end_time, filename):
+    start_time = start_time  # For example, starting at 30 seconds
+    duration = end_time   # For a duration of 10 seconds
+
+    # Use ffmpeg to trim the video
+    subprocess.run([
+        'ffmpeg',
+        '-i', filename,  # Input file
+        '-ss', start_time,             # Start time
+        '-t', duration,                # Duration
+        '-c', 'copy',                  # Copy the stream to avoid re-encoding
+        'trimmed' + str(filename)            # Output file
+    ])
+
+    return 'trimmed' + str(filename)  
+
 def getAllResolutionsUsingYbdl(url):
     subprocess.run(['yt-dlp', '-F', url])
 
@@ -280,6 +298,16 @@ def dowloadFullHd():
       "videolink" : fileLink
     }
 
+@application.route("/download/trimmed", methods=[ 'GET', 'POST'])
+def downloadtrimmed():
+    start_time = request.headers.get('starttime')
+    end_time = request.headers.get('endtime')
+    hasAudio = request.headers.get('filename')
+    fileLink = dowloadTrimmedVideo(start_time, end_time, filename)
+    return {
+      "videolink" : fileLink
+    }
+
 @application.route("/get/download/options", methods=[ 'GET', 'POST'])
 def getLatestMoviesroute():
     try:
@@ -293,7 +321,8 @@ def getLatestMoviesroute():
 
 @application.route('/Videos/<filename>')
 def get_video(filename):
-    return send_from_directory('', filename)
+    response = send_from_directory('videos', filename)
+    return response
 
 @application.route('/Videos/images/<filename>')
 def get_image(filename):

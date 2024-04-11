@@ -31,7 +31,7 @@
 @media (max-width: 767px) {
 
   h1 {
-  font-size: 4vw; /* Adjust the font size as necessary */
+  font-size: 5.3vw; /* Adjust the font size as necessary */
   font-weight: bold;
   text-align: center;
   font:Courier;
@@ -109,6 +109,44 @@
     color: white;
     cursor: pointer;
   }
+
+  @media (max-width: 767px) {
+.input-card {
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+    margin-left: 20px;
+    margin-right:20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input-card input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    border-radius: 20px;
+    border: 0px solid #ccc;
+    outline: none;
+  }
+  .input-card button {
+    width:17%;
+    font-size: 1.5vw;
+    text-align: center;
+    margin-left:5px;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(to right, #D4145A, #FBB03B);
+    color: white;
+    cursor: pointer;
+  }
+}
 
   .content-container {
   align-items: center;
@@ -320,12 +358,15 @@
     
   width: auto;
   display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-  justify-content: left;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-content: center;
   gap: 20px; /* Adjust the space between video players */
   padding: 20px; /* This padding will ensure there's space around the content */
+}
+
+  @media (max-width: 767px) {
+
 }
 
 
@@ -345,6 +386,8 @@
   border-radius: 20px; /* Adjust the pixel value to increase or decrease the roundness */
   overflow: hidden; /* Ensures that the content inside also gets rounded corners */
 }
+
+
 
 .testimonials-section {
     max-width: 100%;
@@ -671,7 +714,42 @@ button_res {
   z-index: 999; /* Just below the progress container's z-index */
   display: none; /* Hide it by default */
 }
+* {
+  box-sizing: border-box;
+}
 
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make sure buttons don't overflow their container */
+.button-list {
+  overflow: auto;
+}
+
+.input-card button {
+  max-width: 100px; /* Set a maximum width for buttons */
+}
+
+
+@media (max-width: 767px) {
+  .input-card,
+  .video-info-card,
+  .scroll-container {
+    width: 95%; /* Set to a smaller width on smaller screens */
+    margin: 10px; /* Reduce margin */
+  }
+   .input-card input[type="text"],
+  .input-card button {
+    padding: 10px; /* Reduce padding */
+  }
+
+.video-player-container {
+    flex-direction: column; /* Stack videos on top of each other */
+  }
+}
 
  
   
@@ -749,19 +827,24 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
      
      <div class="video-player-container">
 
-<iframe class="rounded-iframe" width="220" height="391" controls autoplay src="https://www.youtube.com/embed/kNDZUBYlquc?controls=0&autoplay=1&mute=1&loop=1&playlist=kNDZUBYlquc" allowfullscreen></iframe>
 
 <video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
-  <source src="/Videos/elon.mp4" type="video/mp4">
+  <source src="/Videos/sunset.mp4" type="video/mp4">
   
   
   Your browser does not support the video tag.
 </video>
 
-<iframe class="rounded-iframe" width="220" height="391" controls autoplay src="https://www.youtube.com/embed/kNDZUBYlquc?controls=0&autoplay=1&mute=1&loop=1&playlist=kNDZUBYlquc" allowfullscreen></iframe>
+<video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
+  <source src="/Videos/sunset3.mp4" type="video/mp4">
+  
+  
+  Your browser does not support the video tag.
+</video>
+
 
 <video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
-  <source src="/Videos/elon.mp4" type="video/mp4">
+  <source src="/Videos/sunset2.mp4" type="video/mp4">
   
   
   Your browser does not support the video tag.
@@ -833,7 +916,7 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
     
  </h4>
 
- <h3>Step 2: Visit the Downloader(https://youtubevideodowloader.com/)
+ <h3>Step 2: Visit the Downloader
 
  </h3>
  
@@ -883,7 +966,7 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
     
    
    <div class="footer">
-        <p>Copyright &copy; 2024 Your Website. All Rights Reserved.</p>
+        <p>Copyright &copy; 2024 youtubevideodownloader.com. All Rights Reserved.</p>
         <p><a href="mailto:your_email@example.com" style="color: #f8f9fa;">Contact Us</a></p>
     </div>
     
@@ -1011,20 +1094,7 @@ document.getElementById('progressBar').style.display = 'none';
 document.getElementById('progressText').style.display = 'none';
 }
 function startDownload(resolution) {
-    let progress = 0;
-    const bottleProgress = document.getElementById('bottleProgress');
-    // Reset the progress for a new download simulation
-    bottleProgress.style.height = '0px';
-
-    const interval = setInterval(() => {
-        progress += 10; // Simulating download progress
-        bottleProgress.style.height = `${progress}px`;
-
-        if (progress >= 300) { // Assuming 300px is the full height of the bottle
-            clearInterval(interval);
-            alert(`${resolution} Download Complete!`);
-        }
-    }, 1000); // Simulating download progress every second
+    
 }
 
 
