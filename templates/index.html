@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clippy - Video Clipping Service</title>
+<style>
+    /* Basic Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    header h1 {
+        font-size: 2em;
+        color: #333;
+    }
+
+    nav button {
+        top:10%;
+        padding: 10px 20px;
+        background: none;
+        border: 1px solid #333;
+        cursor: pointer;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .hero h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    #url-form {
+        margin-bottom: 20px;
+    }
+
+    #video-url {
+        padding: 10px;
+        width: calc(100% - 120px);
+        margin-right: -4px; /* Adjust based on your button styling to make flush */
+    }
+
+    #url-form button {
+
+        padding: 10px 20px;
+        margin-left: 10px;
+        background: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    #start-clipping {
+        padding: 10px 20px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    footer p {
+        color: #666;
+    }
+    
+    header {
+        display: flex;
+        justify-content: center; /* This will center the contents of the header */
+        align-items: center;
+        padding: 20px 0;
+    }
+    
+    header h1 {
+        font-size: 2em;
+        color: blue;
+        flex-grow: 1; /* This will allow the h1 to grow and push the nav to the edge */
+        text-align: center; /* This will center the text within the h1 */
+    }
+
+    nav {
+        flex-grow: 0; /* This will prevent the nav from growing and keep it at its natural size */
+    }
+    
+    #video-url{
+    padding: 10px;
+    width: calc(100% - 22px); /* Adjusted to consider padding and border */
+    margin-bottom: 10px; /* Add some space below the inputs */
+}
+#num-videos {
+    padding: 10px;
+    width: calc(100% - 22px); /* Adjusted to consider padding and border */
+    margin-bottom: 10px; /* Add some space below the inputs */
+}
+
+#num-videos {
+    height: 40px; /* Increase the height of the number input */
+}
+
+#url-form button {
+    padding: 10px 20px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%; /* Make the button full width */
+}
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#video-list-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 columns of equal width */
+    gap: 20px; /* Space between grid items */
+    padding: 20px; /* Padding around the grid */
+}
+#position-picker-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure elements are vertically stacked */
+}
+
+#card-view {
+    background: #f0f0f0;
+    height:80%;
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 80%; /* Adjust width as needed */
+    max-width: 310px; /* iPhone-like width */
+    padding-top: 60px; /* Simulating the notch area */
+    position: relative; /* Needed for absolute positioning of elements inside */
+    overflow: hidden; /* Ensures no overflow from the card */
+}
+
+#card-view::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px; /* Adjust based on your notch design */
+    left: 50%;
+    width: 60%; /* Notch width */
+    height: 20px; /* Notch height */
+    background: #000;
+    border-radius: 10px 10px 0 0;
+    transform: translateX(-50%);
+}
+
+#card-view::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 20px; /* Speaker/home button area */
+    left: 50%;
+    width: 20px; /* Home button width */
+    height: 20px; /* Home button height */
+    background: #000;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+#draggable-box {
+    width: calc(100% - 20px); /* Match the width of the popup minus some padding */
+    height: 50px;
+    background: #ccc;
+    cursor: grab;
+    position: absolute;
+    top: 0;
+    left: 10px; /* Half of the subtracted width as padding */
+}
+
+
+
+#open-position-picker {
+    margin-bottom: 4%;
+    max-width:20%;
+    padding: 5px 15px; /* Smaller padding to decrease the button size */
+    margin-top: 20px; /* Adds space between the card and the button */
+    background-color: white; /* White background for the 'card' look */
+    color: black; /* Black text color for contrast */
+    border: 2px solid #ccc; /* Light border to emphasize the card-like appearance */
+    border-radius: 10px; /* Rounded corners for the card-like appearance */
+    font-weight: bold; /* Makes the text slightly bolder */
+    cursor: pointer; /* Indicates the button is clickable */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+#close-position-picker {
+    max-width:20%;
+    padding: 5px 15px; /* Smaller padding to decrease the button size */
+    margin-top: 20px; /* Adds space between the card and the button */
+    background-color: white; /* White background for the 'card' look */
+    color: black; /* Black text color for contrast */
+    border: 2px solid #ccc; /* Light border to emphasize the card-like appearance */
+    border-radius: 10px; /* Rounded corners for the card-like appearance */
+    font-weight: bold; /* Makes the text slightly bolder */
+    cursor: pointer; /* Indicates the button is clickable */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+#close-position-picker:hover {
+    background-color: #f8f8f8; /* Slightly darker background on hover for feedback */
+    color: #333; /* Darker text color on hover for better visibility */
+}
+    
+    /* Additional CSS */
+
+.video-item {
+    /* Additional styling for individual video items can go here */
+}
+</style>
+</head>
+
+
+    
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const openBtn = document.getElementById('open-position-picker');
+    const closeBtn = document.getElementById('close-position-picker');
+    const modal = document.getElementById('position-picker-modal');
+    const draggableBox = document.getElementById('draggable-box');
+    let alignment = 5; // Default to middle center
+    let colorCode = document.getElementById('subtitle-color').value; // Initial color code
+
+    // Function to open the position picker modal
+    openBtn.addEventListener('click', function() {
+        modal.style.display = 'flex';
+    });
+
+    // Function to calculate alignment and close modal
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        alignment = calculateAlignment(); // Recalculate alignment when modal closes
+    });
+
+    // Function to update color code upon change
+    document.getElementById('subtitle-color').addEventListener('change', function(e) {
+        colorCode = e.target.value;
+    });
+
+    // Function to calculate alignment based on the box's vertical position
+    function calculateAlignment() {
+        const boxTop = parseInt(draggableBox.style.top, 10) || 0;
+        const containerHeight = draggableBox.parentElement.clientHeight;
+        const thirdOfContainer = containerHeight / 3;
+
+        if (boxTop < thirdOfContainer) {
+            return 8; // Top center
+        } else if (boxTop < 2 * thirdOfContainer) {
+            return 5; // Middle center
+        } else {
+            return 2; // Bottom center
+        }
+    }
+
+    // Event listener for form submission
+    document.getElementById('url-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Show loader
+        document.getElementById('loader').style.display = 'block';
+        
+        // Retrieve video URL and count values
+        const videoId = document.getElementById('video-url').value;
+        const count = document.getElementById('num-videos').value;
+        const apiUrl = `/naveen/${videoId}/${count}`;
+
+        // API fetch call with alignment and color code passed as headers
+        fetch(apiUrl, {
+            method: 'GET', // Or 'POST', according to your API requirements
+            headers: {
+                'Content-Type': 'application/json',
+                'Alignment': alignment.toString(),
+                'ColorCode': colorCode
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Hide loader
+            document.getElementById('loader').style.display = 'none';
+
+            // Process and display fetched data
+            const container = document.getElementById('video-list-container');
+            container.innerHTML = ''; // Clear existing content
+            data.video_urls.forEach((videoUrl, index) => {
+                // Construct and append new video elements to container
+                const subtitleUrl = `/subtitles/output_${String(index).padStart(3, '0')}.vtt`;
+                const videoElement = `
+                    <div class="video-item">
+                        <video width="320" height="240" controls>
+                            <source src="${videoUrl}" type="video/mp4">
+                            <track src="${subtitleUrl}" kind="subtitles" srclang="en" label="English">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>`;
+                container.innerHTML += videoElement;
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('loader').style.display = 'none'; // Hide loader on error
+        });
+    });
+
+    let isDragging = false;
+    draggableBox.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        let startY = e.clientY;
+        let startTop = parseInt(draggableBox.style.top, 10) || 0;
+
+        function onMouseMove(e) {
+            if (!isDragging) return;
+            let newY = startTop + e.clientY - startY;
+            const lowerBound = 0;
+            const upperBound = draggableBox.parentElement.clientHeight - draggableBox.clientHeight;
+            newY = Math.max(lowerBound, Math.min(upperBound, newY));
+            draggableBox.style.top = newY + 'px';
+        }
+
+        function onMouseUp() {
+            isDragging = false;
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
+});
+</script>
+    
+<body>
+
+
+<div id="loader" style="display: none;">
+    <div class="loader"></div>
+</div>
+    <div class="container">
+        <header>
+            <h1>Naveen shorts</h1>
+            <nav>
+
+            </nav>
+        </header>
+        <main>
+            <section class="hero">
+                <h2>Make short video clips from youtube videos</h2>
+		       <form id="url-form">
+	    <input type="text" id="video-url" name="video-url" placeholder="Enter the URL of a YouTube video to get started." aria-label="YouTube video URL">
+	    <!-- Input field for number of videos -->
+	    <input type="number" id="num-videos" name="num-videos" placeholder="Number of videos" aria-label="Number of Videos" min="1">
+	    
+	     <input type="color" id="subtitle-color" name="subtitle-color" value="#ffffff">
+    <select id="subtitle-font" name="subtitle-font">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Times New Roman">Times New Roman</option>
+    </select>
+    <button id="open-position-picker">Adjust Subtitle Position</button>
+    <div id="position-picker-modal">
+    <div id="card-view">
+        <!-- Draggable area with a fixed height to simulate the screen -->
+        <div style="height: 300px; width: 100%; position: relative; background: white;">
+            <div id="draggable-box"></div>
+        </div>
+    </div>
+    <button id="close-position-picker">Done</button>
+</div>
+	    
+	    <button type="submit">Generate</button>
+	    
+	    <div id="video-list-container">
+    <!-- Videos will be added here by JavaScript -->
+</div>
+	</form>
+
+            </section>
+        </main>
+        <footer>
+        </footer>
+    </div>
+</body>
+</html>
+
