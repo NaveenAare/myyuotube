@@ -189,7 +189,7 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         audio_filename = f"{filename}_audio.mp4"
         audio_stream.download(filename=audio_filename)
         output_filename = f"{filename}_{quality}.mp4"
-        ffmpeg_command = f"ffmpeg -i {video_filename} -i {audio_filename} -c:v copy -c:a aac {output_filename}"
+        ffmpeg_command = f"ffmpeg -i {video_filename} -i {audio_filename} -c:v copy -c:a aac ~/{output_filename}"
         subprocess.run(ffmpeg_command, shell=True)
         os.remove(video_filename)
         os.remove(audio_filename)
