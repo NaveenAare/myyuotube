@@ -267,7 +267,7 @@ def dowloadFullHd():
     hasAudio = request.headers.get('hasAudio')
     print("format_id :::::::::::" + str(format_id))
     fileLink = ""
-    if(format_id == None):
+    if(format_id == None or format_id == 'null'):
         if(str(hasAudio) == "true"):
             print("has audio" + str(hasAudio))
             fileLink = download_video(token, name + ".mp4", res)

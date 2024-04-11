@@ -1128,6 +1128,12 @@ function hideProgressContainer() {
 hideProgressContainer();
 
 function downloadVideo(item, videoUrl) {
+
+  
+  clearInterval(downloadInterval);
+    
+
+
   hideProgressContainer();
 
    showProgressContainer();
@@ -1144,16 +1150,15 @@ function downloadVideo(item, videoUrl) {
     'hasAudio': item.has_audio // Assuming you have a boolean field for audio
   };
   
-  headers = {'Content-Type': 'application/json',
+  let headers = {'Content-Type': 'application/json',
+  'formatid': "item.format_id",
     'url': videoUrl, // Assuming you have a URL field in your items
     'filename': item.title,
     'resolution': item.resolution,
-    'hasAudio': item.has_audio, }
+    'hasAudio': item.has_audio, 
+    'formatid': item.format_id};
 
-  // Add FormatID only if need_format_id is true
-  if(item.need_format_id) {
-    headers['formatid'] = item.format_id;
-  }
+
 
    
 
@@ -1195,28 +1200,17 @@ hideProgressContainer();
    setprogress();
  
   // Show the popup
-
   // Prepare the request body based on the condition of need_format_id
   let requestBody = {
-   'Content-Type': 'application/json',
-    'url': videoUrl, // Assuming you have a URL field in your items
-    'filename': name,
-    'resolution': item.resolution,
-    'hasAudio': item.has_audio // Assuming you have a boolean field for audio
   };
   
-  headers = {'Content-Type': 'application/json',
+  let headers = {'Content-Type': 'application/json',
     'url': videoUrl, // Assuming you have a URL field in your items
     'filename': name,
     'resolution': item.resolution,
-    'hasAudio': item.has_audio, }
-
-  // Add FormatID only if need_format_id is true
-  if(item.need_format_id == 'true') {
-    requestBody['formatid'] = item.format_id;
-  }
-
-   
+    'formatid' : "item.format_id",
+    'hasAudio': item.has_audio,
+    'formatid' : item.format_id,};
 
 
   fetch('/download/fullhd', {
