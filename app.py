@@ -15,6 +15,7 @@ import time
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 import subprocess
+from moviepy.editor import VideoFileClip, AudioFileClip
 
 
 
@@ -50,6 +51,12 @@ def download_video(url, video_filename, quality):
     video_stream.download(filename=video_filename)
     return video_filename
     
+
+def checkFileExistence(filename):
+    if os.path.exists(filename):
+        os.remove(filename)
+
+
 def download_video2(url, filename):
     if os.path.exists(filename):
         os.remove(filename)  # Remove the file if it already exists
@@ -115,9 +122,25 @@ def list_available_resolutions(url):
 
 
 
+def getAudioStatus(value):
+    return value != "none"
+
+def filter_unique_resolutions(formats):
+    seen_resolutions = set()
+    unique_formats = []
+    for format in formats:
+        resolution = format.get("resolution")
+        if resolution not in seen_resolutions:
+            seen_resolutions.add(resolution)
+            unique_formats.append(format)
+    return unique_formats
+
+
 def list_available_resolutions_for_restricted_content(url):
-    desired_format_notes = ["240p", "360p", "720p", "1080p"]
+    print("in age res")
+    desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
     process = subprocess.run(['yt-dlp', '-j', url], capture_output=True, text=True)
+    print(process.stderr)
     if process.returncode == 0:
         try:
             video_info = json.loads(process.stdout)
@@ -127,7 +150,7 @@ def list_available_resolutions_for_restricted_content(url):
 
             format_details = []
 
-            filtered_formats = [format for format in formats if (format.get("format_note") in desired_format_notes and format.get("acodec") != 'none')]
+            filtered_formats = [format for format in formats if (format.get("format_note") in desired_format_notes)]
 
             for format in filtered_formats:
                 detail = {
@@ -137,12 +160,12 @@ def list_available_resolutions_for_restricted_content(url):
                     "thumbnail": thumbnail_url,
                     "title": title,
                     "icon": "/Videos/images/mp4.png",
-
                     "need_format_id": True,
-                    "has_audio": True,
+                    "has_audio": getAudioStatus(format.get("acodec")),
                 }
                 format_details.append(detail)
-            formats_json = json.dumps(format_details, indent=4)
+            reversed_unique_formats = filter_unique_resolutions(format_details)
+            formats_json = json.dumps(reversed_unique_formats[::-1], indent=4)
             print(formats_json)
             return str(formats_json)
         except json.JSONDecodeError as e:
@@ -180,6 +203,7 @@ def dowload_ag_restrcited_videos(url):
 
 def download_video_which_doesnt_have_audio(url, filename, quality):
     try:
+        print("in without audio")
         yt = YouTube(url)
         #video_stream = yt.streams.filter(res="1080p", mime_type="video/mp4", progressive=False).first()
         video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
@@ -189,20 +213,26 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         audio_filename = f"{filename}_audio.mp4"
         audio_stream.download(filename=audio_filename)
         output_filename = f"{filename}_{quality}.mp4"
+        checkFileExistence(output_filename)
         ffmpeg_command = f"ffmpeg -i {video_filename} -i {audio_filename} -c:v copy -c:a aac {output_filename}"
 
+        #video_clip = VideoFileClip(video_filename)
+        #audio_clip = AudioFileClip(audio_filename)
+
+        #final_clip = video_clip.set_audio(audio_clip)
+
+        #final_clip.write_videofile(output_filename, codec="libx264", audio_codec="aac")
+        #os.remove(video_filename)
+        #os.remove(audio_filename)
+
+          
         result = subprocess.run(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-        #subprocess.run(ffmpeg_command, shell=True)
         if result.returncode == 0:
-            #os.remove(video_filename)
-            #os.remove(audio_filename)
-            print("FFmpeg command executed successfully")
-            return output_filename
-        else:
             os.remove(video_filename)
             os.remove(audio_filename)
-            return ""
+            print("FFmpeg command executed successfully")
+            return output_filename
     except Exception as e:
         print(e)
         return ""
@@ -239,6 +269,30 @@ def dowload_age_restricted_videos(url, format_id, output_filename):
     if result.returncode == 0:
         print("Download successful")
         return output_filename
+    else:
+        print("Download failed:", result.stderr)
+        return ""
+
+def dowload_age_restricted_videos_having_without_audio(url, format_id, output_filename):
+    print("In age rest without audio")
+    command = ['yt-dlp', '-f', str(format_id), url]
+    commandToDownloadAudio = ['yt-dlp', '-f', 'bestaudio', '--extract-audio', '--audio-format', 'mp3', url]
+
+    if output_filename:
+        command += ['-o', output_filename]
+        commandToDownloadAudio += ['-o', output_filename.replace(".mp4", ".mp3")]
+    result = subprocess.run(command, capture_output=True, text=True)
+    result = subprocess.run(commandToDownloadAudio, capture_output=True, text=True)
+
+    if result.returncode == 0:
+        print("Download successful")
+        video_clip = VideoFileClip(output_filename)
+        audio_clip = AudioFileClip(output_filename.replace(".mp4", ".mp3"))
+
+        final_clip = video_clip.set_audio(audio_clip)
+
+        final_clip.write_videofile(output_filename.replace(".mp4", "_1.mp4"), codec="libx264", audio_codec="aac")
+        return output_filename.replace(".mp4", "_1.mp4")
     else:
         print("Download failed:", result.stderr)
         return ""
@@ -298,7 +352,11 @@ def dowloadFullHd():
         else:
             fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
     else:
-        fileLink = dowload_age_restricted_videos(token, int(format_id), name + ".mp4")
+        if(str(hasAudio) == "true"):
+            fileLink = dowload_age_restricted_videos(token, int(format_id), clean_string(name) + ".mp4")
+        else:
+            fileLink = dowload_age_restricted_videos_having_without_audio(token, int(format_id), clean_string(name) + ".mp4")
+        
 
     return {
       "videolink" : fileLink

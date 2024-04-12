@@ -785,7 +785,7 @@ video {
 
 
     <ul class="button-list">
-<!--  <li><button class="neu-button">1080p - (size 140.79MB) ⬇️</button></li>
+<!--  <li><button class="neu-button">1080p - (size 140.79MB) 🚀 ⬇️</button></li>
   <li><button class="neu-button">760p - (size 140.79MB) ⬇️</button></li>
   <li><button class="neu-button">460p - (size 140.79MB) ⬇️</button></li>
   <li><button class="neu-button">340p - (size 140.79MB) ⬇️</button></li>
@@ -1130,7 +1130,29 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
       const buttonItem = document.createElement('li');
       const downloadButton = document.createElement('button');
       downloadButton.className = 'neu-button';
-      downloadButton.textContent = `${item.resolution} - (size ${item.filesize}) ⬇️`;
+      if(item.has_audio){
+        const textBefore = document.createTextNode(`${item.resolution} - (size ${item.filesize}) `);
+        const textFastDownload = document.createElement('span');
+        textFastDownload.textContent = '-Quick download';
+        const textAfter = document.createTextNode(' 🚀 ⬇️');
+
+        textFastDownload.style.color = 'green';
+
+        downloadButton.appendChild(textBefore);
+        downloadButton.appendChild(textFastDownload);
+        downloadButton.appendChild(textAfter);
+      } else{
+        const textBefore = document.createTextNode(`${item.resolution} - (size ${item.filesize}) `);
+        const textFastDownload = document.createElement('span');
+        const textAfter = document.createTextNode(' 🐌 ⬇️');
+
+        textFastDownload.style.color = 'Red';
+
+        downloadButton.appendChild(textBefore);
+        downloadButton.appendChild(textFastDownload);
+        downloadButton.appendChild(textAfter);
+      }
+      
       downloadButton.addEventListener('click', function() {
         downloadVideo(item, videoUrl);
       });
