@@ -294,7 +294,7 @@ def dowloadFullHd():
     if(format_id == None or format_id == 'null'):
         if(str(hasAudio) == "true"):
             print("has audio" + str(hasAudio))
-            fileLink = download_video(token, name + ".mp4", res)
+            fileLink = download_video(token, clean_string(name) + ".mp4", res)
         else:
             fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
     else:
