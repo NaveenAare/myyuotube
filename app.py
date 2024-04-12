@@ -15,7 +15,6 @@ import time
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 import subprocess
-from moviepy.editor import VideoFileClip, AudioFileClip
 
 
 
@@ -280,19 +279,30 @@ def dowload_age_restricted_videos_having_without_audio(url, format_id, output_fi
 
     if output_filename:
         command += ['-o', output_filename]
-        commandToDownloadAudio += ['-o', output_filename.replace(".mp4", ".mp3")]
+        commandToDownloadAudio += ['-o', output_filename.replace(".mp4", "audio_.mp4")]
     result = subprocess.run(command, capture_output=True, text=True)
     result = subprocess.run(commandToDownloadAudio, capture_output=True, text=True)
 
+    print("Download successful")
+    audifilename = output_filename.replace(".mp4", "audio_.mp4")
+    ooutputfilename = output_filename.replace(".mp4", "_1.mp4")
+    ffmpeg_command = f"ffmpeg -i {output_filename} -i {audifilename} -c:v copy -c:a aac {ooutputfilename}"
+
+    result = subprocess.run(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
     if result.returncode == 0:
-        print("Download successful")
-        video_clip = VideoFileClip(output_filename)
-        audio_clip = AudioFileClip(output_filename.replace(".mp4", ".mp3"))
+        
 
-        final_clip = video_clip.set_audio(audio_clip)
+        #video_clip = VideoFileClip(output_filename)
+        #audio_clip = AudioFileClip()
 
-        final_clip.write_videofile(output_filename.replace(".mp4", "_1.mp4"), codec="libx264", audio_codec="aac")
-        return output_filename.replace(".mp4", "_1.mp4")
+        #final_clip = video_clip.set_audio(audio_clip)
+
+        #final_clip.write_videofile(output_filename.replace(".mp4", "_1.mp4"), codec="libx264", audio_codec="aac")
+        os.remove(output_filename)
+        os.remove(output_filename.replace(".mp4", "audio_.mp4"))
+        print("FFmpeg command executed successfully")
+        return ooutputfilename
     else:
         print("Download failed:", result.stderr)
         return ""
