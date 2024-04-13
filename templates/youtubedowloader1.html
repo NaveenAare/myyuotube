@@ -1062,36 +1062,10 @@ document.querySelectorAll('.resolution-option').forEach(option => {
 });
 
 
-let downloadInterval = null; // Global variable to store the interval ID
-
-function setprogress() {
-  let progress = 0;
-  
-  // Clear any existing intervals to reset the progress
-  if (downloadInterval !== null) {
-    clearInterval(downloadInterval);
-  }
-
-  // Update the progress bar immediately to reset it to 0%
-  updateProgressBar(progress);
-
-  downloadInterval = setInterval(() => {
-    if (progress < 90) {
-      progress += 1; // Simulating download progress
-      updateProgressBar(progress);
-    } else {
-      clearInterval(downloadInterval); // Stop the interval when reaching 90%
-      // Optionally call another function here to handle completion logic
-    }
-  }, 300);
-}
-
-
 
 function setProgressNull(){
 updateProgressBar(0); 
-document.getElementById('progressBar').style.display = 'none';
-document.getElementById('progressText').style.display = 'none';
+document.querySelector('.progress-container').style.display = 'none';
 }
 function startDownload(resolution) {
     
@@ -1131,14 +1105,27 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
       const downloadButton = document.createElement('button');
       downloadButton.className = 'neu-button';
       if(item.has_audio){
-        const textBefore = document.createTextNode(`${item.resolution} - (size ${item.filesize}) `);
+        const spanBefore = document.createElement('span');
+        let filesize = ""
+        if(item.filesize != 'Null'){
+            filesize = "- (size ${item.filesize})";
+        }
+        spanBefore.textContent = `${item.resolution} `;
+        spanBefore.style.fontFamily = 'Arial';
+        spanBefore.style.fontWeight = 'bold';
+
+
+
         const textFastDownload = document.createElement('span');
         textFastDownload.textContent = '-Quick download';
+        spanBefore.style.fontWeight = 'bold';
         const textAfter = document.createTextNode(' 🚀 ⬇️');
 
         textFastDownload.style.color = 'green';
+        textFastDownload.style.fontFamily = 'Courier';
+        textFastDownload.style.fontWeight = 'bold';
 
-        downloadButton.appendChild(textBefore);
+        downloadButton.appendChild(spanBefore);
         downloadButton.appendChild(textFastDownload);
         downloadButton.appendChild(textAfter);
       } else{
@@ -1199,41 +1186,55 @@ function initiateDownload(downloadUrl) {
     anchor.click();
     document.body.removeChild(anchor);
 }
+
 function showProgressContainer() {
-  // Show the progress container
   document.querySelector('.progress-container').style.display = 'block';
-  
-  // Show the overlay
   document.querySelector('.overlay').style.display = 'block';
 }
-let progress = 0;
-// JavaScript function to hide the progress container and overlay
+
+
 function hideProgressContainer() {
-  // Hide the progress container
-  progress = 0;
   document.querySelector('.progress-container').style.display = 'none';
-  
-  // Hide the overlay
   document.querySelector('.overlay').style.display = 'none';
 }
 
-hideProgressContainer();
+
+
+let intervalID;
+
+function setprogress() {
+    let progress = 0;
+    clearTimeout(intervalID);
+    updateProgressBar(progress);
+    function incrementProgress() {
+        progress += 1;
+        updateProgressBar(progress);
+        let delay;
+        if (progress < 90) {
+            delay = 130; // 0 to 90: Update every 100ms
+        } else if (progress < 95) {
+            delay = 900; // 90 to 95: Update every 500ms
+        } else if (progress < 99) {
+            delay = 1500; // 95 to 99: Update every 1000ms
+        } else {
+            return;
+        }
+        intervalID = setTimeout(incrementProgress, delay);
+    }
+
+    incrementProgress();
+}
+
 
 function downloadVideo(item, videoUrl) {
 
   
-  clearInterval(downloadInterval);
-    
-
-
   hideProgressContainer();
 
-   showProgressContainer();
-   setprogress();
+  showProgressContainer();
+  setprogress();
  
-  // Show the popup
 
-  // Prepare the request body based on the condition of need_format_id
   let requestBody = {
    'Content-Type': 'application/json',
     'url': videoUrl, // Assuming you have a URL field in your items
@@ -1273,7 +1274,7 @@ function downloadVideo(item, videoUrl) {
   })
   .catch(error => {
     hideProgressContainer();
-    setProgressNull();
+
     console.error('Download error:', error);
     downloadVideo22(item, videoUrl, generateRandomDigits(5))
   });
@@ -1284,10 +1285,13 @@ function generateRandomDigits(n) {
   const max = Math.pow(10, n) - 1;
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+hideProgressContainer();
 
 function downloadVideo22(item, videoUrl, name) {
-hideProgressContainer();
-    setProgressNull();
+   
+   hideProgressContainer();
+   setProgressNull();
+
    showProgressContainer();
    setprogress();
  

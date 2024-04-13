@@ -105,8 +105,9 @@ def list_available_resolutions(url):
             "icon": "/Videos/images/mp4.png",
             "need_format_id": False
         } for resolution, details in sorted_resolutions]
-        
-        json_string = json.dumps(video_details, indent=4)
+        sorted_video_details = sorted(video_details, key=lambda x: not x['has_audio'])
+
+        json_string = json.dumps(sorted_video_details, indent=4)
         return json_string
     except Exception as e:
         try:
@@ -163,8 +164,8 @@ def list_available_resolutions_for_restricted_content(url):
                     "has_audio": getAudioStatus(format.get("acodec")),
                 }
                 format_details.append(detail)
-            reversed_unique_formats = filter_unique_resolutions(format_details)
-            formats_json = json.dumps(reversed_unique_formats[::-1], indent=4)
+            reversed_unique_formats = sorted(filter_unique_resolutions(format_details), key=lambda x: not x['has_audio'])
+            formats_json = json.dumps(reversed_unique_formats, indent=4)
             print(formats_json)
             return str(formats_json)
         except json.JSONDecodeError as e:
