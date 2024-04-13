@@ -98,7 +98,7 @@
   }
   .input-card button {
     width:17%;
-    font-size: 1.2vw;
+    font-size: 1vw;
     text-align: center;
     margin-left:5px;
     align-items: center;
@@ -135,7 +135,7 @@
   }
   .input-card button {
     width:17%;
-    font-size: 1.5vw;
+    font-size: 1.4vw;
     text-align: center;
     margin-left:5px;
     align-items: center;
@@ -879,20 +879,20 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
     <h2>Testimonials</h2>
     <div class="testimonials-container">
         <div class="testimonial" id="testimonial1">
-            <img src="static/images (13).jpeg" alt="Person Name">
+            <img src="static/im2.jpeg" alt="Person Name">
             <p class="testimonial-name">Alex Johnson</p>
             <p class="testimonial-rating">⭐⭐⭐⭐⭐</p>
             <p class="testimonial-text">"This YouTube video downloader is fantastic! It's fast, easy to use, and gets me the videos I need in no time."</p>
         </div>
         <div class="testimonial" id="testimonial2">
-            <img src="static/images (14).jpeg" alt="Person Name">
+            <img src="static/barbie.png" alt="Person Name">
             <p class="testimonial-name">Samantha Lee</p>
             <p class="testimonial-rating">⭐⭐⭐⭐</p>
             <p class="testimonial-text">"I've tried many downloaders, but this one truly stands out. Highly recommended!"</p>
         </div>
         <div class="testimonial" id="testimonial2">
-            <img src="static/42yYJ_5f.jpg" alt="Person Name">
-            <p class="testimonial-name">Mona lisa</p>
+            <img src="static/im1.jpeg" alt="Person Name">
+            <p class="testimonial-name">Pal Abraham</p>
             <p class="testimonial-rating">⭐⭐⭐⭐</p>
             <p class="testimonial-text">"This YouTube video downloader is incredibly easy to use and fast. It has made downloading videos a breeze for me!"</p>
         </div>
@@ -1108,9 +1108,9 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
         const spanBefore = document.createElement('span');
         let filesize = ""
         if(item.filesize != 'Null'){
-            filesize = "- (size ${item.filesize})";
+            filesize = `- (size ${item.filesize})`;
         }
-        spanBefore.textContent = `${item.resolution} `;
+        spanBefore.textContent = `${item.resolution} ${filesize}`;
         spanBefore.style.fontFamily = 'Arial';
         spanBefore.style.fontWeight = 'bold';
 
