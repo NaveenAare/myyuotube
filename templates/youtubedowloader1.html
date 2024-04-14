@@ -70,6 +70,16 @@
   margin-top: 20px; /* Adjust margin as needed */
 }
 
+ h6 {
+ margin-left:5%;
+ margin-right:5%;
+  font-size: 10px; /* Adjust the font size as necessary */
+  text-align: center;
+  font-weight: normal;
+  font-family: 'Nunito', sans-serif;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
 
  
   
@@ -381,6 +391,13 @@
  flex-direction: column;
 }
 
+.tags-container2 {
+  text-align: left;
+  justify-content: start;
+  display: flex;
+  width: 100%; /* Adjust width to less than 100% to leave room for padding/margins */
+ flex-direction: column;
+}
 
 .rounded-iframe {
   border-radius: 20px; /* Adjust the pixel value to increase or decrease the roundness */
@@ -751,7 +768,61 @@ video {
   }
 }
 
- 
+ .features-section {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1200px; 
+    gap: 10px;
+    margin: 10px;
+    margin-top: 30px;
+    /* Maximum width of the section */
+}
+
+.feature {
+
+
+    flex: 1; /* Each feature takes equal width */
+    min-width: 250px; /* Minimum width of each feature */
+    max-width: 100%; /* Adjust the max-width to be 25% of the parent minus the gap */
+    margin-bottom: 20px; /* Space below each feature */
+    padding: 20px; /* Padding inside each feature */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for styling */
+    border-radius: 10px; /* Rounded corners for styling */
+    background: white; /* Optional: Background color for feature */
+}
+
+.feature img {
+    width: 64px; /* Icon size */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space below the icon */
+}
+
+@media (max-width: 1200px) {
+    /* For screens smaller than 1200px, but larger than 768px */
+    .feature {
+        max-width: calc(33.3333% - 40px); /* 3 items per row */
+    }
+}
+
+@media (max-width: 768px) {
+    /* For screens smaller than 768px */
+    .feature {
+        max-width: calc(50% - 40px); /* 2 items per row */
+    }
+}
+
+@media (max-width: 550px) {
+    /* For screens smaller than 480px */
+    .feature {
+        max-width: 100%; /* 1 item per row */
+        min-width: 100%; /* Ensure it stretches to full width */
+    }
+}
   
  
 </style>
@@ -807,15 +878,14 @@ video {
      <div class="tags-container">
     <h3>Download Your Favorite YouTube Videos Instantly with Our Free YouTube Video Downloader!
  </h3>
- <h4>Unleash the power of content! With our YouTube Video Downloader, you can save videos from YouTube in high-quality resolutions with just a few clicks. Whether you're looking to capture the latest music videos, informative tutorials, or hilarious vlogs, our downloader provides a seamless experience that keeps the entertainment at your fingertips.
+ <h4>Enjoy unlimited video downloads for free. Explore our tool to unlock the perfect solution to overcoming YouTube's download limitations. Elevate your downloading experience in a fast, easy, and secured way.
  </h4>
  
  
- <h5>Effortless Downloading: Our tool is designed for ease. Simply paste the YouTube video URL into our downloader, choose your preferred format, and hit download. It's that easy! No complicated processes or technical know-how needed.
-
-Quality at Its Best: We understand that quality matters. That's why our YouTube Video Downloader supports various resolutions, including stunning 4K and Full HD. Enjoy crisp, clear, and vibrant visuals as if you were streaming directly from YouTube.
- </h5>
+ <h4>YouTube is always full of fresh and cool stuff to watch! From awesome videos to quick shorts, there's something for everyone on all sorts of topics. You can now easily download your favourite content with our tool, say goodbye to buffering and streaming interruptions, and access your favourite content offline, anytime you want.
+ </h4>
  
+   <h3 style="color: #FFA500;">Download Your videos as below in 4k</h3>
  
  </div>
     
@@ -823,7 +893,9 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
     
     
      </div>
-     
+
+
+
      
      <div class="video-player-container">
 
@@ -836,7 +908,7 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
 </video>
 
 <video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
-  <source src="/Videos/sunset3.mp4" type="video/mp4">
+  <source src="/Videos/bridge.mp4" type="video/mp4">
   
   
   Your browser does not support the video tag.
@@ -844,64 +916,25 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
 
 
 <video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
-  <source src="/Videos/sunset2.mp4" type="video/mp4">
+  <source src="/Videos/train1.mp4" type="video/mp4">
   
   
   Your browser does not support the video tag.
 </video>
 
 
-    </div>
-     
-     
-         <div class="tags-container">
-    <h3>Download Your Favorite YouTube Videos Instantly with Our Free YouTube Video Downloader!
- </h3>
- <h4>Unleash the power of content! With our YouTube Video Downloader, you can save videos from YouTube in high-quality resolutions with just a few clicks. Whether you're looking to capture the latest music videos, informative tutorials, or hilarious vlogs, our downloader provides a seamless experience that keeps the entertainment at your fingertips.
- </h4>
- 
- 
- <h5>Effortless Downloading: Our tool is designed for ease. Simply paste the YouTube video URL into our downloader, choose your preferred format, and hit download. It's that easy! No complicated processes or technical know-how needed.
-
-Quality at Its Best: We understand that quality matters. That's why our YouTube Video Downloader supports various resolutions, including stunning 4K and Full HD. Enjoy crisp, clear, and vibrant visuals as if you were streaming directly from YouTube.
- </h5>
- 
- 
- </div>
-    
-   
-   
-   
+<video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
+  <source src="/Videos/city.mp4" type="video/mp4">
   
-   </div>
+  
+  Your browser does not support the video tag.
+</video>
 
-  <div class="testimonials-section">
-    <h2>Testimonials</h2>
-    <div class="testimonials-container">
-        <div class="testimonial" id="testimonial1">
-            <img src="static/im2.jpeg" alt="Person Name">
-            <p class="testimonial-name">Alex Johnson</p>
-            <p class="testimonial-rating">⭐⭐⭐⭐⭐</p>
-            <p class="testimonial-text">"This YouTube video downloader is fantastic! It's fast, easy to use, and gets me the videos I need in no time."</p>
-        </div>
-        <div class="testimonial" id="testimonial2">
-            <img src="static/barbie.png" alt="Person Name">
-            <p class="testimonial-name">Samantha Lee</p>
-            <p class="testimonial-rating">⭐⭐⭐⭐</p>
-            <p class="testimonial-text">"I've tried many downloaders, but this one truly stands out. Highly recommended!"</p>
-        </div>
-        <div class="testimonial" id="testimonial2">
-            <img src="static/im1.jpeg" alt="Person Name">
-            <p class="testimonial-name">Pal Abraham</p>
-            <p class="testimonial-rating">⭐⭐⭐⭐</p>
-            <p class="testimonial-text">"This YouTube video downloader is incredibly easy to use and fast. It has made downloading videos a breeze for me!"</p>
-        </div>
-        <!-- Add more testimonials as needed -->
     </div>
-</div>
-   
-   
-          <div class="tags-container">
+
+
+
+    <div class="tags-container">
     <h3>Steps to dowload video
  </h3>
  <h3>Step 1: Find Your Video
@@ -962,12 +995,173 @@ Quality at Its Best: We understand that quality matters. That's why our YouTube 
  
  
  </div>
+     
+
+
+     <div class="features-section">
+    <div class="feature">
+        <img src="static/fullhd.png" alt="HD Download">
+        <h3 style="color: #FFA500;"> High Quality Conversions</h3>
+        <h4>With our Youtube Video Downloader tool you can download videos in 720p, 1080p, and 4k high quality and provides you with crisp audio every time.</h4>
+    </div>
+    <div class="feature">
+        <img src="static/unlimited.png" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">No Download Cap </h3>
+        <h4>You can download unlimited shorts or videos of any length here</h4>
+    </div>
+
+    <div class="feature">
+        <img src="static/free2.png" alt="HD Download">
+        <h3 style="color: #FFA500;">Downloads Are Free </h3>
+        <h4>Convert video to your preferred resolution and download it for free.</h4>
+    </div>
+    <div class="feature">
+        <img src="static/fastdownload.jpg" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">Optimal download speeds</h3>
+        <h4>Our platform converts YouTube videos in seconds. You have the option to download your preferred resolution, with the quick download option processing will be faster.</h4>
+    </div>
+
+
+
+    <div class="feature">
+        <img src="static/userfriendly.png" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">User friendly</h3>
+        <h4>Just few clicks and your download will be ready to go!</h4>
+    </div>
+
+    <div class="feature">
+        <img src="static/web.jpg" alt="HD Download">
+        <h3 style="color: #FFA500;">Compatable with browser, mobile</h3>
+        <h6>Works seamlessly on all browsers, including Chrome, Firefox, Safari, Microsoft Edge, and more. It's compatible with all modern devices including iPhones, iPads, Mac computers, Linux computers, Windows PCs, Android phones and tablets.</h6>
+    </div>
+    <div class="feature">
+        <img src="static/key.jpg" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">No Registration Required</h3>
+        <h4>You don't need to create an account to use our service.</h4>
+    </div>
+
+</div>
+     
+
+
+     
+      
+
+
+
+    
+        
+   
+   
+  
+   </div>
+
+  <div class="testimonials-section">
+    <h2>Testimonials</h2>
+    <div class="testimonials-container">
+        <div class="testimonial" id="testimonial1">
+            <img src="static/im2.jpeg" alt="Person Name">
+            <p class="testimonial-name">Alex Johnson</p>
+            <p class="testimonial-rating">⭐⭐⭐⭐⭐</p>
+            <p class="testimonial-text">"This YouTube video downloader is fantastic! It's fast, easy to use, and gets me the videos I need in no time."</p>
+        </div>
+        <div class="testimonial" id="testimonial2">
+            <img src="static/barbie.png" alt="Person Name">
+            <p class="testimonial-name">Samantha Lee</p>
+            <p class="testimonial-rating">⭐⭐⭐⭐</p>
+            <p class="testimonial-text">"I've tried many downloaders, but this one truly stands out. Highly recommended!"</p>
+        </div>
+        <div class="testimonial" id="testimonial2">
+            <img src="static/im1.jpeg" alt="Person Name">
+            <p class="testimonial-name">Pal Abraham</p>
+            <p class="testimonial-rating">⭐⭐⭐⭐</p>
+            <p class="testimonial-text">"This YouTube video downloader is incredibly easy to use and fast. It has made downloading videos a breeze for me!"</p>
+        </div>
+        <!-- Add more testimonials as needed -->
+    </div>
+</div>
+   
+
+
+
+
+      <div class="tags-container2">
+    <h3 style="color: #ff0000;">FAQs
+ </h3>
+ <h3 style="text-align: start;">1) How do I download YouTube videos from here?
+ </h3>
+ 
+ 
+ <h4 style="text-align: start; margin-top: 2px ;">To download a YouTube video, go to the video you want to download, copy the video URL, paste that link in the text box, click the download button, and choose your preferred resolution from the available options: 1080p, 720p, 480p, 360p, 240p, or 144p. Your video will be downloaded in MP4 format. It's that easy!
+ </h4>
+
+
+<h3 style="text-align: start;">2) Can I choose different video formats to download?
+?
+ </h3>
+ 
+ 
+ <h4 style="text-align: start; margin-top: 2px ;">For now, we are supporting MP4 format downloads only.
+ </h4>
+
+
+
+<h3 style="text-align: start;">3) Any limit on how many videos I can download??
+ </h3>
+ 
+ 
+ <h4 style="text-align: start; margin-top: 2px ;">There is no limit
+ </h4>
+
+
+
+<h3 style="text-align: start;">4) Is it safe to download videos from YouTube using this tool?
+ </h3>
+ 
+ 
+ <h4 style="text-align: start; margin-top: 2px ;">It's completely safe. We don't keep user downloaded videos track.
+ </h4>
+
+
+<h3 style="text-align: start;">5) How do I get the YouTube video URL?
+ </h3>
+ 
+ 
+ <h4 style="text-align: start; margin-top: 2px ;">To get the YouTube video URL, Go to the YouTube video you want and 
+Browser: Copy the URL from the address bar or, on the right click, choose copy video URL.
+Mobile(Android/ iOS): Tap Share below the video playback and select the copy link.
+ </h4>
+
+
+<h3 style="text-align: start;">6) What video resolutions are available?
+ </h3>
+ 
+ 
+ <h4 style="text-align: start; margin-top: 2px ;">We support different video qualities 1080p, 720p, 480p, 360p, 240p,and 144p.
+ </h4>
+
+
+
+ 
+ 
+ </div>
+
+
+
+
+   
+          
     
     
    
    <div class="footer">
+        <p><a href="/privacypolicy" style="text-decoration: none; color: #fff;" target="_blank">Privacy Policy</a></p>
+
+        <p><a href="/termsandconditions" style="text-decoration: none; color: #fff
+
+;"  target="_blank">Terms & Conditions</a></p>
         <p>Copyright &copy; 2024 youtubevideodownloader.com. All Rights Reserved.</p>
-        <p><a href="mailto:your_email@example.com" style="color: #f8f9fa;">Contact Us</a></p>
+        <p><a href="/contactus" style="color: #f8f9fa;" target="_blank">Contact Us</a></p>
     </div>
     
 </div>

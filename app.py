@@ -413,6 +413,18 @@ def get_image(filename):
 def main():
     return render_template('youtubedowloader1.html')
 
+@application.route("/privacypolicy", methods=['GET'])
+def mainprivacy():
+    return render_template('privacypolicy.html')
+
+@application.route("/termsandconditions", methods=['GET'])
+def mainterms():
+    return render_template('termsandconditions.html')
+
+@application.route("/contactus", methods=['GET'])
+def contactus():
+    return render_template('contactus.html')
+
 
 if __name__ == "__main__":
     scheduler.add_job(id='Scheduled Task', func=delete30minutesOldFiles, trigger='interval', minutes=20)
