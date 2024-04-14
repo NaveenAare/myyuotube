@@ -31,7 +31,7 @@ def delete30minutesOldFiles():
     print("In delete30minutesOldFiles")
 
     current_dir = os.getcwd()
-    max_age = 30 * 60
+    max_age = 10 * 60
 
     now = time.time()
     for filename in os.listdir(current_dir):
@@ -365,7 +365,7 @@ def dowloadFullHd():
     current_epoch_time = time.time()
     decoded_token = ""
     token = request.headers.get('url')
-    token = token.split("&")(0)
+    token = token.split("&")[0]
     name = request.headers.get('filename')
     name = name + "_"+ str(current_epoch_time)
     res = request.headers.get('resolution')
