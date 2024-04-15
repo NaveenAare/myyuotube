@@ -91,10 +91,30 @@ def list_available_resolutions(url):
                 }
         
         # Sort the resolutions in descending order
+
+        sorted_resolutions = []
         sorted_resolutions = sorted(resolution_details.items(), key=lambda x: int(x[0][:-1]), reverse=True)
         
         title = yt.title
         thumbnail_url = yt.thumbnail_url
+
+        duration_seconds = yt.length
+
+        if(duration_seconds > 300):
+            filtered_formatsss = []
+            for resolution, format in sorted_resolutions:
+                print(format)
+                if(format["has_audio"]):
+                    filtered_formatsss.append((resolution, format))
+                sorted_resolutions = filtered_formatsss
+            #sorted_resolutions = [format for format in sorted_resolutions if (format["has_audio"])]
+
+
+
+
+        print(f"The duration of the video is {duration_seconds} seconds.")
+
+
         video_details = [{
             "resolution": resolution,
             "filesize": bytes_to_mb(details["filesize"]),
@@ -111,7 +131,7 @@ def list_available_resolutions(url):
         return json_string
     except Exception as e:
         try:
-            print("Hbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+            print(f"Hbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb  {e}")
             return list_available_resolutions_for_restricted_content(url)
         except Exception as e:
             return {
@@ -148,9 +168,20 @@ def list_available_resolutions_for_restricted_content(url):
             thumbnail_url = video_info.get('thumbnail', '')
             title  = video_info.get('title', '')
 
+
+            duration = video_info.get('duration', '')
+
+            print(f"The duration of the video is {duration} seconds.")
+
             format_details = []
 
-            filtered_formats = [format for format in formats if (format.get("format_note") in desired_format_notes)]
+            if(duration > 300):
+                filtered_formats = [format for format in formats if (format.get("format_note") in desired_format_notes and getAudioStatus(format.get("acodec")))]
+                filtered_formats = filtered_formats[::-1]
+            else:
+                filtered_formats = [format for format in formats if (format.get("format_note") in desired_format_notes)]
+
+
 
             for format in filtered_formats:
                 detail = {
@@ -280,12 +311,12 @@ def dowload_age_restricted_videos_having_without_audio(url, format_id, output_fi
 
     if output_filename:
         command += ['-o', output_filename]
-        commandToDownloadAudio += ['-o', output_filename.replace(".mp4", "audio_.mp4")]
+        commandToDownloadAudio += ['-o', output_filename.replace(".mp4", "audio_")]
     result = subprocess.run(command, capture_output=True, text=True)
     result = subprocess.run(commandToDownloadAudio, capture_output=True, text=True)
 
-    print("Download successful")
-    audifilename = output_filename.replace(".mp4", "audio_.mp4")
+    print(f"Download successful  ${output_filename}")
+    audifilename = output_filename.replace(".mp4", "audio_.mp3")
     ooutputfilename = output_filename.replace(".mp4", "_1.mp4")
     ffmpeg_command = f"ffmpeg -i {output_filename} -i {audifilename} -c:v copy -c:a aac {ooutputfilename}"
 
@@ -301,7 +332,7 @@ def dowload_age_restricted_videos_having_without_audio(url, format_id, output_fi
 
         #final_clip.write_videofile(output_filename.replace(".mp4", "_1.mp4"), codec="libx264", audio_codec="aac")
         os.remove(output_filename)
-        os.remove(output_filename.replace(".mp4", "audio_.mp4"))
+        os.remove(output_filename.replace(".mp4", "audio_.mp3"))
         print("FFmpeg command executed successfully")
         return ooutputfilename
     else:
