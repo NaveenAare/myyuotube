@@ -458,6 +458,12 @@ def get_image(filename):
     
     return response
 
+
+@application.route('/sitemap.xml')
+def getSitemap():
+    response = send_from_directory('static', "sitemap.xml")
+    return response
+
 @application.route("/", methods=['GET'])
 def main():
     return render_template('youtubedowloader1.html')
