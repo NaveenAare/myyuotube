@@ -15,6 +15,7 @@ import time
 from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 import subprocess
+import requests
 
 
 
@@ -371,6 +372,30 @@ def extract_youtube_url(input_string):
         return "No valid YouTube URL found."
 
 
+def increment_counter():
+    url = "https://videos-downloader-13024-default-rtdb.asia-southeast1.firebasedatabase.app/Count.json"
+    try:
+        response = requests.get(url, timeout=0.1)  # Timeout set to 100 milliseconds
+        if response.status_code == 200:
+            count = response.json()
+            if count is None:
+                count = 0
+            new_count = count + 1
+            put_response = requests.put(url, json=new_count, timeout=0.5)  # Timeout for PUT request as well
+            if put_response.status_code == 200:
+                print(f"Counter updated successfully: {new_count}")
+            else:
+                print(f"Failed to update counter: {put_response.status_code}")
+        else:
+            print(f"Failed to get current count: {response.status_code}")
+    except requests.exceptions.Timeout:
+        print("The request timed out")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
+
+
+
 
 def dowloadTrimmedVideo(start_time, end_time, filename):
     start_time = start_time  # For example, starting at 30 seconds
@@ -393,6 +418,10 @@ def getAllResolutionsUsingYbdl(url):
 
 @application.route("/download/fullhd", methods=[ 'GET', 'POST'])
 def dowloadFullHd():
+    try:
+        increment_counter()
+    except:
+        print("except")
     current_epoch_time = time.time()
     decoded_token = ""
     token = request.headers.get('url')
