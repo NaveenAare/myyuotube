@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descargador de videos y cortos de YouTube rápido y gratuito en línea - youtubevideosdownloader.com</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="static/favicon.ico" type="image/x-icon">
+    <meta name="description" content="
+Descarga tus videos favoritos de YouTube sin esfuerzo con nuestro descargador de videos de YouTube en línea gratuito. Ofreciendo resoluciones de alta calidad hasta 4K, nuestra herramienta garantiza descargas rápidas y seguras directamente en tu navegador. ¡Comienza a disfrutar de tus videos sin conexión en solo un par de clics!">
+
+<link rel="canonical" href="https://youtubevideosdownloader.com/">
+
+
+<style>
+  body, html {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    width:100%;
+    align-items: center; /* Center children vertically */
+    flex-direction: column; /* Stack children vertically */
+    background-color: #f7f7f7;
+  }
+   h1 {
+  font-size: 3vw; /* Adjust the font size as necessary */
+  font-weight: bold;
+  text-align: center;
+  font:Courier;
+  background: linear-gradient(to right, #D4145A, #FBB03B);
+  -webkit-background-clip: text;
+  color: transparent; /* Makes the text color transparent, showing the background */
+  margin-top: 20px; /* Adjust margin as needed */
+}
+@media (max-width: 767px) {
+
+  h1 {
+  font-size: 5.3vw; /* Adjust the font size as necessary */
+  font-weight: bold;
+  text-align: center;
+  font:Courier;
+  background: linear-gradient(to right, #D4145A, #FBB03B);
+  -webkit-background-clip: text;
+  color: transparent; /* Makes the text color transparent, showing the background */
+  margin-top: 20px; /* Adjust margin as needed */
+}
+}
+ h3 {
+ margin-left:5%;
+ margin-right:5%;
+  font-size: 25px; /* Adjust the font size as necessary */
+  text-align: center;
+  margin-top: 20px; 
+   font-family: 'Nunito', sans-serif;/* Adjust margin as needed */
+}
+
+ h4 {
+ margin-left:5%;
+ margin-right:5%;
+  font-size: 15px; /* Adjust the font size as necessary */
+  text-align: center;
+  font-weight: normal;
+  font-family: 'Nunito', sans-serif;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+ h5 {
+ margin-left:5%;
+ margin-right:5%;
+  font-size: 12px; /* Adjust the font size as necessary */
+  text-align: center;
+  font-weight: normal;
+  font-family: 'Nunito', sans-serif;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+ h6 {
+ margin-left:5%;
+ margin-right:5%;
+  font-size: 10px; /* Adjust the font size as necessary */
+  text-align: center;
+  font-weight: normal;
+  font-family: 'Nunito', sans-serif;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+
+ 
+  
+
+  .input-card {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    margin-left: 20px;
+    margin-right:20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input-card input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    border-radius: 20px;
+    border: 0px solid #ccc;
+    outline: none;
+  }
+  .input-card button {
+    width:17%;
+    font-size: 1vw;
+    text-align: center;
+    margin-left:5px;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(to right, #D4145A, #FBB03B);
+    color: white;
+    cursor: pointer;
+  }
+
+  @media (max-width: 767px) {
+.input-card {
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+    margin-left: 20px;
+    margin-right:20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input-card input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    border-radius: 20px;
+    border: 0px solid #ccc;
+    outline: none;
+  }
+  .input-card button {
+    width:17%;
+    font-size: 1.4vw;
+    text-align: center;
+    margin-left:5px;
+    align-items: center;
+    padding: 10px 10px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(to right, #D4145A, #FBB03B);
+    color: white;
+    cursor: pointer;
+  }
+}
+
+  .content-container {
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin: 3vh auto; /* More dynamic spacing */
+  flex-direction: column;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center; /* Horizontally center children */
+  align-items: center; /* Vertically center children */
+  width: 100%;
+  height: auto;
+  margin: 2vh auto; /* More dynamic spacing */
+  flex-direction: column; /* Stack children vertically */
+}
+
+.video-info-card {
+  width: 50%; /* Adjust based on preference, 50% for demonstration */
+  height: auto; /* Auto height for content-based sizing */
+  margin-top: 20px;
+  padding: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center; /* Horizontally center the content inside the card */
+  align-items: center; /* Vertically center the content inside the card */
+}
+
+.video-info-card img {
+  max-width: 100%; /* Ensure image is not larger than its container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Rounded corners for the image */
+}
+  
+
+
+.video-info-card h2 {
+  font-size: 1.2vw; /* Adjust the font size as necessary */
+  text-align: center;
+  background: #000;
+  -webkit-background-clip: text;
+  color: transparent; /* Makes the text color transparent, showing the background */
+  margin-top: 2px;
+  overflow: hidden; /* Hide overflow text */
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Number of lines you want to display */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis; /* This will not work with line-clamp but included for consistency */
+  width: 100%; /* Ensure the width is set so overflow and text-overflow are effective */
+}
+
+  .scroll-container {
+  position: relative;
+  width: 40%; /* Adjust based on layout preference */
+  height: 100%; /* Container height */
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid #FBB03B;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Scroll Area */
+.scroll-area {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width:100%;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Individual Scroll Items */
+.scroll-area li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribute space between elements inside card */
+  width: 90%; /* Width of cards relative to container */
+  margin: 10px 0;
+  height:25%;
+  padding: 20px; /* Increase padding for better spacing */
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+}
+
+/* Hover Effect for Cards */
+.scroll-area li:hover {
+  transform: translateY(-3px); /* Slight raise effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Selected Item Styling */
+.scroll-area li.selected {
+  border: 2px solid #D4145A; /* Highlight selected item */
+  background-color: #f9f9f9; /* Slightly different background for selected */
+}
+
+/* Image Styling inside Scroll Items */
+.scroll-area li img {
+  width: 60px; /* Adjust image size */
+  height: 60px; /* Keep square aspect ratio */
+  border-radius: 50%; /* Circle shape */
+  object-fit: cover; /* Ensure images cover the space properly */
+  margin-right: 20px; /* Space between image and text */
+}
+
+/* Text Styling inside Scroll Items */
+.scroll-area li span {
+  flex-grow: 1; /* Allow text to take available space */
+  font-size: 16px; /* Text size */
+  color: #333; /* Text color */
+}
+  .loader {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+   #downloadPopup {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fixed position to stay in place even on scroll */
+    left: 50%; /* Centering horizontally - move to half of the window's width */
+    top: 50%; /* Centering vertically - move to half of the window's height */
+    transform: translate(-50%, -50%); /* Offset by own dimensions for perfect center */
+    width: 30%; /* Set width */
+    height: 30%; /* Set height */
+    background-color: #FFF; /* Background color */
+    justify-content: center; /* Center children horizontally (if flex) */
+    align-items: center; /* Center children vertically (if flex) */
+    text-align: center; /* Center text */
+    color: black; /* Text color */
+    z-index: 1000; /* High z-index to ensure it's above other elements */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #FBB03B; /* Border */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Shadow for a pop effect */
+      z-index: 1000; /* Ensures the popup is above the overlay */
+
+}
+
+#overlay {
+  display: none; /* Initially hidden */
+  position: fixed; /* Cover the whole viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999; /* Ensure it's below the popup but above everything else */
+}
+
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.video-player-container {
+    
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-content: center;
+  gap: 20px; /* Adjust the space between video players */
+  padding: 20px; /* This padding will ensure there's space around the content */
+}
+
+  @media (max-width: 767px) {
+
+}
+
+
+.video-player-seo {
+  display: flex;
+  width: 100%; /* Adjust width to less than 100% to leave room for padding/margins */
+ flex-direction: row;
+}
+.tags-container {
+  display: flex;
+  width: 100%; /* Adjust width to less than 100% to leave room for padding/margins */
+ flex-direction: column;
+}
+
+.tags-container2 {
+  text-align: left;
+  justify-content: start;
+  display: flex;
+  width: 100%; /* Adjust width to less than 100% to leave room for padding/margins */
+ flex-direction: column;
+}
+
+.rounded-iframe {
+  border-radius: 20px; /* Adjust the pixel value to increase or decrease the roundness */
+  overflow: hidden; /* Ensures that the content inside also gets rounded corners */
+}
+
+
+
+.testimonials-section {
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.testimonials-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Space between testimonial items */
+}
+
+.testimonial {
+    flex: 1;
+    min-width: 250px; /* Minimum width for each testimonial to avoid squeezing on small screens */
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.testimonial-name {
+    font-weight: normal; /* Adjusted as per request */
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.testimonial-rating {
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+
+.testimonial-text {
+    font-style: italic;
+    font-size: 14px;
+}
+.resolution-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.resolution-option {
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.bottle-container {
+    width: 100px;
+    height: 300px;
+    background-color: #ccc;
+    position: relative;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: auto;
+}
+
+.bottle-progress {
+    width: 80%;
+    background-color: blue;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px 10px 0 0;
+}
+button_res {
+    display: block;
+    margin-top: 20px;
+}
+.footer {
+            padding: 20px;
+            text-align: center;
+            background: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        #textContainer {
+    position: absolute;
+    transition: all 2s ease-in-out; /* Smooth transition for the movement */
+}
+
+
+
+#textBox {
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    /* No initial transition here */
+}
+
+.button-list {
+          list-style-type: none; /* Remove default list styling */
+
+  display: flex; /* Align children horizontally */
+  flex-wrap: wrap; /* Allow items to wrap onto the next line if there's not enough room */
+  justify-content: center; /* Center buttons horizontally */
+  gap: 10px; /* Space between buttons */
+  padding: 10px; /* Add some padding around the container */
+}
+
+.neu-button {
+  background: #e0e0e0;
+  /*background: linear-gradient(to right, #FF6B6B, #FFD56B);*/
+
+  border-radius: 10px;
+  box-shadow: 8px 8px 16px #a3a3a3,
+              -8px -8px 16px #ffffff;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  margin: 10px;
+  cursor: pointer; /* To show it's clickable */
+  font-size: 14px; /* Set font size */
+  color: #333; /* Text color */
+  transition: box-shadow 0.2s, transform 0.2s; /* Smooth transition for click and hover effects */
+  flex: 0 1 auto; /* Allow buttons to shrink but not grow */
+}
+
+.neu-button:active {
+    background: linear-gradient(to right, #D4145A, #FBB03B);
+
+  box-shadow: inset 8px 8px 16px #a3a3a3,
+              inset -8px -8px 16px #ffffff;
+  transform: scale(0.95); /* Make the button slightly smaller */
+}
+
+.neu-button:hover {
+  box-shadow: 5px 5px 10px #a3a3a3,
+              -5px -5px 10px #ffffff;
+  transform: scale(1.05); /* Make the button slightly larger */
+}
+
+.loading-dots {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  height: 18px;
+  width: 18px;
+  margin: 0 4px;
+  background-color: #333;
+  border-radius: 50%;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotFlashing {
+  0% { opacity: 0; }
+  50%,
+  100% { opacity: 1; }
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.popup-container {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 10px;
+    /* Remove the bottom property and animation from here */
+}
+
+/* Animation for sliding up */
+@keyframes slideUp {
+    0% {
+        transform: translate(-50%, 100%);
+    }
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+.circle-progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.circle-progress {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 4;
+}
+
+.circle {
+    fill: none;
+    stroke: #4CAF50;
+    stroke-width: 4;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s;
+}
+
+.circle-text {
+    fill: #333;
+    font-size: 0.5em;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+@keyframes slideUp {
+    to { bottom: 50%; transform: translate(-50%, -50%); }
+}
+
+  .progress-container {
+   position: fixed; /* or 'absolute' if within a positioned parent */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Make sure it's above other content */
+}
+
+.progress-bar {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(orange 0% 0%, #eee 0% 100%);
+}
+
+.progress-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  height: 130px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-text {
+  font-size: 1.2em;
+  color: #333;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.progress-circle::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.6), transparent 60%);
+  border-radius: 50%;
+  animation: shine 2s infinite linear;
+}
+
+@keyframes shine {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust color and opacity to desired dimness */
+  z-index: 999; /* Just below the progress container's z-index */
+  display: none; /* Hide it by default */
+}
+* {
+  box-sizing: border-box;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make sure buttons don't overflow their container */
+.button-list {
+  overflow: auto;
+}
+
+.input-card button {
+  max-width: 100px; /* Set a maximum width for buttons */
+}
+
+
+@media (max-width: 767px) {
+  .input-card,
+  .video-info-card,
+  .scroll-container {
+    width: 95%; /* Set to a smaller width on smaller screens */
+    margin: 10px; /* Reduce margin */
+  }
+   .input-card input[type="text"],
+  .input-card button {
+    padding: 10px; /* Reduce padding */
+  }
+
+.video-player-container {
+    flex-direction: column; /* Stack videos on top of each other */
+  }
+}
+
+ .features-section {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 1200px; 
+    gap: 10px;
+    margin: 10px;
+    margin-top: 30px;
+    /* Maximum width of the section */
+}
+
+.feature {
+
+
+    flex: 1; /* Each feature takes equal width */
+    min-width: 250px; /* Minimum width of each feature */
+    max-width: 100%; /* Adjust the max-width to be 25% of the parent minus the gap */
+    margin-bottom: 20px; /* Space below each feature */
+    padding: 20px; /* Padding inside each feature */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for styling */
+    border-radius: 10px; /* Rounded corners for styling */
+    background: white; /* Optional: Background color for feature */
+}
+
+.feature img {
+    width: 64px; /* Icon size */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space below the icon */
+}
+
+@media (max-width: 1200px) {
+    /* For screens smaller than 1200px, but larger than 768px */
+    .feature {
+        max-width: calc(33.3333% - 40px); /* 3 items per row */
+    }
+}
+
+@media (max-width: 768px) {
+    /* For screens smaller than 768px */
+    .feature {
+        max-width: calc(50% - 40px); /* 2 items per row */
+    }
+}
+
+@media (max-width: 550px) {
+    /* For screens smaller than 480px */
+    .feature {
+        max-width: 100%; /* 1 item per row */
+        min-width: 100%; /* Ensure it stretches to full width */
+    }
+}
+
+#dropdownMenu {
+        position: fixed; /* Fixed position relative to the viewport */
+        top: 10px; /* 10px from the top */
+        right: 10px; /* 10px from the right */
+        font-size: 16px; /* Font size of dropdown */
+    }
+    select {
+        border: 1px solid #ccc; /* Add a slight border */
+        background: white; /* White background for visibility */
+        color: #333; /* Text color */
+        padding: 5px 10px; /* Padding for better handling */
+        cursor: pointer; /* Cursor pointer on hover */
+    }
+    select:focus {
+        outline-color: blue; /* Blue outline on focus for visibility */
+    }
+ 
+</style>
+</head>
+<body>
+
+ 
+
+
+<h1> Descarga videos de YouTube en HD / 4k </h1>
+
+
+<div class="overlay" id="overlay"></div>
+
+<!-- Popup Container -->
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-circle"></div>
+    <span class="progress-text" id="progressText">0%</span>
+  </div>
+</div>
+
+
+</div>
+<div class="input-card">
+    <input type="text" id="videoUrl" placeholder="Enter YouTube URL here">
+    <button id="downloadBtn">Download</button>
+  </div>
+  <div class="content-container">
+
+    <div id="loadingDots" class="loading-dots" style="display: none;">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+   </div>
+
+
+    <ul class="button-list">
+<!--  <li><button class="neu-button">1080p - (size 140.79MB) 🚀 ⬇️</button></li>
+  <li><button class="neu-button">760p - (size 140.79MB) ⬇️</button></li>
+  <li><button class="neu-button">460p - (size 140.79MB) ⬇️</button></li>
+  <li><button class="neu-button">340p - (size 140.79MB) ⬇️</button></li>
+  <li><button class="neu-button">144p - (size 140.79MB) ⬇️</button></li>-->
+</ul>
+ <div class="video-info-card" id="videoInfoCard" style="display:none;">
+  <img id="videoThumbnail" src="/static/mp4.png" alt="Video Thumbnail">
+
+  <h2 id="videoTitle">Video Title</h2>
+</div>
+
+
+
+
+<!-- <div id="textBox" onclick="simulateDownloadss()">Click Me!</div> -->
+</div>
+<div class="video-player-seo">
+
+     <div class="tags-container">
+    <h3 >Descarga rápidamente tu contenido favorito de YouTube con nuestro descargador de videos de YouTube gratuito!
+ </h3>
+ <h4>Disfruta de descargas ilimitadas de videos de YouTube y cortos de YouTube gratis. Explora nuestra herramienta para descubrir la solución perfecta para superar las limitaciones de descarga de YouTube. Eleva tu experiencia de descarga de una manera rápida, fácil y segura. ¡YouTube siempre está lleno de cosas frescas y geniales para ver! Desde videos increíbles hasta cortos rápidos, hay algo para todos sobre todo tipo de temas. Ahora puedes descargar fácilmente tu contenido favorito con nuestra herramienta segura y eficaz, dile adiós a las interrupciones por buffering y transmisión, y accede a tu contenido favorito sin conexión, cuando quieras. ¿Alguna vez te has encontrado queriendo guardar un video de YouTube para verlo de nuevo pero te encuentras con problemas de internet o restricciones de la plataforma? Nuestra herramienta de descarga de YouTube cambia todo eso, dándote la libertad de disfrutar de un mundo ilimitado de contenido de video a tu conveniencia, sin la necesidad de una conexión constante a internet. Esta herramienta no es solo una utilidad de descarga. Es tu puerta de entrada a una experiencia de visualización ininterrumpida y enriquecida.
+ </h4>
+ 
+ 
+
+ 
+
+
+   <h3 style="color: #FFA500;">Descarga tus videos y cortos favoritos de YouTube en impresionante resolución 4K.</h3>
+ 
+ </div>
+    
+    
+    
+    
+     </div>
+
+
+
+     
+     <div class="video-player-container">
+
+
+<video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
+  <source src="/Videos/sunset.mp4" type="video/mp4">
+  
+  
+  Your browser does not support the video tag.
+</video>
+
+<video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
+  <source src="/Videos/bridge.mp4" type="video/mp4">
+  
+  
+  Your browser does not support the video tag.
+</video>
+
+
+<video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
+  <source src="/Videos/train1.mp4" type="video/mp4">
+  
+  
+  Your browser does not support the video tag.
+</video>
+
+
+<video class="rounded-iframe" width="220" height="391" autoplay muted loop controlsList="nodownload">
+  <source src="/Videos/city.mp4" type="video/mp4">
+  
+  
+  Your browser does not support the video tag.
+</video>
+
+    </div>
+
+
+
+    <div class="tags-container">
+
+
+ <h3 style="color: #FFA500;"> 
+Por qué te encantará nuestro descargador de videos de YouTube
+ </h3>
+ 
+ <h3>
+
+Libertad para descargar sin límites
+
+
+ </h3>
+
+ <h4>
+
+Di hola a infinitas posibilidades con la función de descarga ilimitada de nuestra herramienta. Ya sean los últimos videos musicales, guías completas paso a paso o documentales cautivadores, puedes descargar tanto como desees, completamente gratis. Di adiós a la frustración de las limitaciones de transmisión en línea y hola a un tesoro de contenido.
+
+ </h4>
+
+ <h3>
+Increíblemente fácil de usar
+
+ </h3>
+
+
+<h4>
+Navegar por nuestra herramienta es un juego de niños. Diseñada pensando en todas las edades y niveles de habilidad tecnológica, nuestra interfaz intuitiva te permite comenzar a descargar en segundos. Ya seas un estudiante, un profesional o un abuelo, encontrarás que nuestra herramienta es increíblemente fácil y conveniente.
+</h4>
+
+<h3>
+
+La seguridad como prioridad
+
+  </h3>
+
+  <h4>
+In the digital era, securing your online activities is crucial. Our YouTube Downloader ensures that every video you download is completely safe, free from viruses, malware, or any cyber threats. We protect your device as if it were our own, so you can focus on enjoying your content worry-free.
+
+  </h4>
+
+
+  <h3>
+
+Advanced Options for the Avid User
+
+
+
+
+  </h3>
+
+  <h4>
+En la era digital, asegurar tus actividades en línea es crucial. Nuestro descargador de YouTube garantiza que cada video que descargas esté completamente seguro, libre de virus, malware o cualquier amenaza cibernética. Protegemos tu dispositivo como si fuera el nuestro, para que puedas concentrarte en disfrutar de tu contenido sin preocupaciones.
+
+
+<h3 style="color: #FFA500;" >Características que ofrecemos
+ </h3>
+
+
+
+  <div class="features-section">
+    <div class="feature">
+        <img src="static/fullhd.png" alt="HD Download">
+        <h3 style="color: #FFA500;"> Conversiones de alta calidad</h3>
+        <h4>Con nuestra herramienta de descarga de videos de YouTube, puedes descargar videos en calidad alta de 720p, 1080p y 4k, proporcionándote un audio nítido en cada ocasión.</h4>
+    </div>
+    <div class="feature">
+        <img src="static/unlimited.png" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">Sin límite de descarga </h3>
+        <h4>
+Puedes guardar aquí cortos o videos ilimitados de cualquier duración.</h4>
+    </div>
+
+    <div class="feature">
+        <img src="static/free2.png" alt="HD Download">
+        <h3 style="color: #FFA500;">Las descargas son gratuitas </h3>
+        <h4>
+Convierte el video a la resolución que prefieras y descárgalo gratis..</h4>
+    </div>
+    <div class="feature">
+        <img src="static/fastdownload.jpg" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">Velocidades de descarga óptimas</h3>
+        <h4>Nuestra plataforma convierte videos de YouTube en segundos. Tienes la opción de descargar la resolución que prefieras, y con la opción de descarga rápida, el procesamiento será más rápido.</h4>
+    </div>
+
+
+
+    <div class="feature">
+        <img src="static/userfriendly.png" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">Fácil de usar</h3>
+        <h4>
+¡Solo unos pocos clics y tu descarga estará lista para comenzar!</h4>
+    </div>
+
+    <div class="feature">
+        <img src="static/web.jpg" alt="HD Download">
+        <h3 style="color: #FFA500;">Compatible con navegadores y dispositivos móviles</h3>
+        <h6>Funciona sin problemas en todos los navegadores, incluidos Chrome, Firefox, Safari, Microsoft Edge y más. Es compatible con todos los dispositivos modernos, incluidos iPhones, iPads, computadoras Mac, computadoras Linux, PCs con Windows, teléfonos Android, PC y tabletas.</h6>
+    </div>
+    <div class="feature">
+        <img src="static/key.jpg" alt="Unlimited Downloads">
+        <h3 style="color: #FFA500;">No se requiere registro</h3>
+        <h4>
+No necesitas crear una cuenta para usar nuestro servicio.</h4>
+    </div>
+
+</div>
+
+
+  </h4>
+
+    <h3 style="color: #FFA500;" >Steps to dowload video
+ </h3>
+
+
+<h3>Paso 1: Encuentra tu video</h3>
+<h4>(i) Ve a YouTube y navega hasta el video que deseas descargar.</h4>
+<h4>(ii) Haz clic en el video para abrirlo, luego resalta y copia la URL desde la barra de direcciones de tu navegador.</h4>
+<h3>Paso 2: Visita el Descargador</h3>
+<h4>(i) Abre una nueva pestaña en tu navegador y ve a https://youtubevideodownloader.com/.</h4>
+<h4>(ii) Una vez en la página del descargador, verás un campo de entrada etiquetado "Ingresa la URL de YouTube aquí".</h4>
+<h3>Paso 3: Pega la URL</h3>
+<h4>(i) Haz clic en el campo de entrada y pega la URL del video de YouTube que copiaste en el Paso 1.</h4>
+<h4>(ii) Asegúrate de que la URL esté pegada correctamente sin espacios ni caracteres adicionales.</h4>
+<h3>Paso 4: Elige la Calidad</h3>
+<h4>(i) Al pegar la URL, se te pueden presentar diferentes opciones de calidad de video, como 144p, 360p, 720p y 1080p.</h4>
+<h4>(ii) Selecciona la calidad de video que prefieras. Los videos de mayor calidad resultarán en tamaños de archivo más grandes.</h4>
+<h3>Paso 5: Inicia la Descarga</h3>
+<h4>(i) Haz clic en el botón 'Descargar' junto al campo de entrada o bajo la calidad de video que elegiste.</h4>
+<h4>(ii) El sitio web procesará el video y lo preparará para la descarga. Esto puede tomar unos momentos.</h4>
+<h4>(iii) Una vez procesado el video, la descarga comenzará automáticamente.</h4>
+<h3>Paso 7: Mira sin Conexión</h3>
+<h4>(i) Navega hasta la carpeta donde guardaste el archivo.</h4>
+<h4>(ii) Haz doble clic en el archivo de video para reproducirlo en tu reproductor multimedia predeterminado.</h4>
+<h4>(iii) ¡Disfruta viendo el video sin conexión en cualquier momento!</h4>
+ 
+ 
+ </div>
+     
+
+
+   
+     
+
+
+     
+      
+
+
+
+    
+        
+   
+   
+  
+   </div>
+
+<div class="testimonials-section">
+    <h2>Testimonios</h2>
+    <div class="testimonials-container">
+        <div class="testimonial" id="testimonial1">
+            <img src="static/im2.jpeg" alt="Nombre de la persona">
+            <p class="testimonial-name">Alex Johnson</p>
+            <p class="testimonial-rating">⭐⭐⭐⭐⭐</p>
+            <p class="testimonial-text">"¡Este descargador de videos de YouTube es fantástico! Es rápido, fácil de usar y obtengo los videos que necesito en muy poco tiempo."</p>
+        </div>
+        <div class="testimonial" id="testimonial2">
+            <img src="static/barbie.png" alt="Nombre de la persona">
+            <p class="testimonial-name">Samantha Lee</p>
+            <p class="testimonial-rating">⭐⭐⭐⭐</p>
+            <p class="testimonial-text">"He probado muchos descargadores, pero este realmente se destaca. ¡Muy recomendado!"</p>
+        </div>
+        <div class="testimonial" id="testimonial2">
+            <img src="static/im1.jpeg" alt="Nombre de la persona">
+            <p class="testimonial-name">Pal Abraham</p>
+            <p class="testimonial-rating">⭐⭐⭐⭐</p>
+            <p class="testimonial-text">"Este descargador de videos de YouTube es increíblemente fácil de usar y rápido. ¡Ha hecho que descargar videos sea muy fácil para mí!"</p>
+        </div>
+        <!-- Añade más testimonios según sea necesario -->
+    </div>
+</div>
+
+
+
+
+
+      <div class="tags-container2">
+    <h3 style="color: #FFA500;">Preguntas Frecuentes</h3>
+<h3 style="text-align: start;">1) ¿Cómo descargo videos de YouTube desde aquí?</h3>
+
+<h4 style="text-align: start; margin-top: 2px ;">Para descargar un video de YouTube, ve al video que quieres descargar, copia la URL del video, pega ese enlace en el cuadro de texto, haz clic en el botón de descarga y elige la resolución preferida de las opciones disponibles: 1080p, 720p, 480p, 360p, 240p, o 144p. Tu video será convertido y descargado en formato MP4. ¡Es así de fácil!</h4>
+
+<h3 style="text-align: start;">2) ¿Puedo elegir diferentes formatos de video para descargar?</h3>
+
+<h4 style="text-align: start; margin-top: 2px ;">Por ahora, solo admitimos descargas en formato MP4.</h4>
+
+<h3 style="text-align: start;">3) ¿Hay algún límite en cuántos videos puedo descargar?</h3>
+
+<h4 style="text-align: start; margin-top: 2px ;">No hay límite.</h4>
+
+<h3 style="text-align: start;">4) ¿Es seguro descargar videos de YouTube usando esta herramienta?</h3>
+
+<h4 style="text-align: start; margin-top: 2px ;">Es completamente seguro. No mantenemos un seguimiento de los videos descargados por los usuarios.</h4>
+
+<h3 style="text-align: start;">5) ¿Cómo obtengo la URL del video de YouTube?</h3>
+
+<h4 style="text-align: start; margin-top: 2px ;">Para obtener la URL del video de YouTube, ve al video que deseas y en el Navegador: Copia la URL de la barra de direcciones o, con el clic derecho, elige copiar URL del video.
+Móvil (Android/ iOS): Toca Compartir debajo de la reproducción del video y selecciona copiar enlace.</h4>
+
+<h3 style="text-align: start;">6) ¿Qué resoluciones de video están disponibles?</h3>
+
+<h4 style="text-align: start; margin-top: 2px ;">Admitimos diferentes calidades de video 1080p, 720p, 480p, 360p, 240p y 144p.</h4>
+
+
+
+ 
+ 
+ </div>
+
+
+
+<h6>Asesoramiento Legal</h6>
+
+<h6> 
+En youtubevideosdownloader.com, entendemos el placer de ver tus videos favoritos en cualquier momento y lugar. Aunque generalmente es aceptable descargar videos, fotos y GIFs para disfrute personal, enfatizamos la importancia de respetar las leyes de derechos de autor y propiedad intelectual. Te alentamos a descargar contenido estrictamente para uso personal y a evitar cualquier compartición o distribución no autorizada.
+</h6>
+
+<h6>Descargo de Responsabilidad</h6>
+
+<h6> 
+youtubevideosdownloader.com opera de manera independiente y no está asociado con ninguna plataforma de redes sociales o alojamiento de videos. Nuestro servicio está específicamente diseñado para satisfacer las necesidades de descarga únicas de nuestros usuarios. Es tu responsabilidad adherirte a todos los términos, condiciones y leyes de derechos de autor de las plataformas desde las cuales accedes al contenido. Por favor, asegúrate de cumplir para continuar disfrutando de nuestros servicios de manera responsable.
+</h6>
+
+    
+   
+   <div class="footer">
+        <p><a href="/privacypolicy" style="text-decoration: none; color: #fff;" target="_blank">Privacy Policy</a></p>
+
+        <p><a href="/termsandconditions" style="text-decoration: none; color: #fff
+
+;"  target="_blank">Terms & Conditions</a></p>
+        <p>Copyright &copy; 2024 youtubevideodownloader.com. All Rights Reserved.</p>
+        <p><a href="/contactus" style="color: #f8f9fa;" target="_blank">Contact Us</a></p>
+    </div>
+    
+</div>
+
+
+<script>
+
+  function showOverlay() {
+  document.getElementById('overlay').style.display = 'block';
+}
+
+function hideOverlay() {
+  document.getElementById('overlay').style.display = 'none';
+
+}
+
+function updateProgressBar(percentage) {
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+
+  progressBar.style.background = `conic-gradient(orange ${percentage}% 0%, #eee ${percentage}% 100%)`;
+  progressText.textContent = `${percentage}%`;
+}
+
+// Example usage:
+// Update the progress bar to 30%
+
+
+
+// Function to update circular progress bar
+function setCircleProgress(percentage) {
+    const circle = document.querySelector(".circle");
+    const radius = circle.r.baseVal.value;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (percentage / 100 * circumference);
+
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = offset;
+
+    // Update text
+    const text = document.querySelector(".circle-text");
+    text.textContent = `${percentage}%`;
+}
+
+
+
+  function showLoadingDots() {
+  document.getElementById('loadingDots').style.display = 'flex';
+}
+
+function hideLoadingDots() {
+  document.getElementById('loadingDots').style.display = 'none';
+}
+
+
+
+
+
+
+
+document.addEventListener('dblclick', function(event) {
+    const selectedText = window.getSelection().toString().trim();
+    if (selectedText) {
+        animateText(selectedText, event.clientX, event.clientY);
+    }
+});
+
+function animateText(text, startX, startY) {
+    const textContainer = document.getElementById('textContainer');
+    textContainer.innerText = text;
+    textContainer.style.left = `${startX}px`;
+    textContainer.style.top = `${startY}px`;
+
+    // Animate to the bottle
+    const bottle = document.getElementById('bottle');
+    const bottleRect = bottle.getBoundingClientRect();
+    
+    textContainer.style.left = `${bottleRect.left + (bottleRect.width / 2) - (textContainer.offsetWidth / 2)}px`;
+    textContainer.style.top = `${bottleRect.top}px`;
+
+    // Clear the text after the animation completes
+    setTimeout(() => {
+        textContainer.innerText = '';
+    }, 2000); // Matches the CSS transition duration
+}
+
+
+document.querySelectorAll('.resolution-option').forEach(option => {
+    option.addEventListener('click', function() {
+        startDownload(this.getAttribute('data-resolution'));
+    });
+});
+
+
+
+function setProgressNull(){
+updateProgressBar(0); 
+document.querySelector('.progress-container').style.display = 'none';
+}
+function startDownload(resolution) {
+    
+}
+
+
+document.getElementById('downloadBtn').addEventListener('click', function() {
+  showLoadingDots()
+  const videoUrl = document.getElementById('videoUrl').value;
+  // Remove previous content from the button list
+  const buttonList = document.querySelector('.button-list');
+  buttonList.innerHTML = ''; // Clear previous buttons
+  const videoInfoCard = document.getElementById('videoInfoCard');
+  const videoThumbnail = document.getElementById('videoThumbnail');
+  const videoTitle = document.getElementById('videoTitle');
+
+  // Clear existing image and title
+  videoThumbnail.src = '';
+  videoTitle.textContent = '';
+
+  // Show loader, hide previous content containers
+  videoInfoCard.style.display = 'none'; // Hide the video info card until new data is loaded
+
+  fetch('/get/download/options', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'URL': videoUrl
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    hideLoadingDots() 
+    // Populate the button list with new data
+    data.forEach(item => {
+      const buttonItem = document.createElement('li');
+      const downloadButton = document.createElement('button');
+      downloadButton.className = 'neu-button';
+      if(item.has_audio){
+        const spanBefore = document.createElement('span');
+        let filesize = ""
+        if(item.filesize != 'Null'){
+            filesize = `- (size ${item.filesize})`;
+        }
+        spanBefore.textContent = `${item.resolution} ${filesize}`;
+        spanBefore.style.fontFamily = 'Arial';
+        spanBefore.style.fontWeight = 'bold';
+
+
+
+        const textFastDownload = document.createElement('span');
+        textFastDownload.textContent = '-Descarga rápida';
+        spanBefore.style.fontWeight = 'bold';
+        const textAfter = document.createTextNode(' 🚀 ⬇️');
+
+        textFastDownload.style.color = 'green';
+        textFastDownload.style.fontFamily = 'Courier';
+        textFastDownload.style.fontWeight = 'bold';
+
+        downloadButton.appendChild(spanBefore);
+        downloadButton.appendChild(textFastDownload);
+        downloadButton.appendChild(textAfter);
+      } else{
+        const textBefore = document.createTextNode(`${item.resolution} - (size ${item.filesize}) `);
+        const textFastDownload = document.createElement('span');
+        const textAfter = document.createTextNode(' 🐌 ⬇️');
+
+        textFastDownload.style.color = 'Red';
+
+        downloadButton.appendChild(textBefore);
+        downloadButton.appendChild(textFastDownload);
+        downloadButton.appendChild(textAfter);
+      }
+      
+      downloadButton.addEventListener('click', function() {
+        downloadVideo(item, videoUrl);
+      });
+
+      buttonItem.appendChild(downloadButton);
+      buttonList.appendChild(buttonItem);
+    });
+
+    if(data.length > 0) {
+      videoThumbnail.src = data[0].thumbnail; // Set new image source
+      videoTitle.textContent = data[0].title; // Set new title text
+      videoInfoCard.style.display = 'block'; // Show the video info card with new content
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching download options:', error);
+  });
+});
+
+
+function updateSelectedItem() {
+  let closest = Infinity;
+  let index = -1;
+  const scrollItems = document.querySelectorAll('.scroll-area li');
+  scrollItems.forEach((item, idx) => {
+    const itemPos = item.offsetTop + item.clientHeight / 2;
+    const scrollPos = scrollArea.scrollTop + scrollArea.clientHeight / 2;
+    const distance = Math.abs(itemPos - scrollPos);
+    if (distance < closest) {
+      closest = distance;
+      index = idx;
+    }
+    item.classList.remove('selected');
+  });
+  if (index !== -1) scrollItems[index].classList.add('selected');
+}
+
+function initiateDownload(downloadUrl) {
+    // This creates an anchor element (`<a>`) dynamically
+    var anchor = document.createElement('a');
+    anchor.href = "/Videos/images/" + downloadUrl;
+    anchor.download = ''; // Optional: Specify a filename for the download
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+}
+
+function showProgressContainer() {
+  document.querySelector('.progress-container').style.display = 'block';
+  document.querySelector('.overlay').style.display = 'block';
+}
+
+
+function hideProgressContainer() {
+  document.querySelector('.progress-container').style.display = 'none';
+  document.querySelector('.overlay').style.display = 'none';
+}
+
+
+
+let intervalID;
+
+function setprogress() {
+    let progress = 0;
+    clearTimeout(intervalID);
+    updateProgressBar(progress);
+    function incrementProgress() {
+        progress += 1;
+        updateProgressBar(progress);
+        let delay;
+        if (progress < 90) {
+            delay = 130; // 0 to 90: Update every 100ms
+        } else if (progress < 95) {
+            delay = 900; // 90 to 95: Update every 500ms
+        } else if (progress < 99) {
+            delay = 1500; // 95 to 99: Update every 1000ms
+        } else {
+            return;
+        }
+        intervalID = setTimeout(incrementProgress, delay);
+    }
+
+    incrementProgress();
+}
+
+
+function downloadVideo(item, videoUrl) {
+
+  
+  hideProgressContainer();
+
+  showProgressContainer();
+  setprogress();
+ 
+
+  let requestBody = {
+   'Content-Type': 'application/json',
+    'url': videoUrl, // Assuming you have a URL field in your items
+    'filename': item.title,
+    'resolution': item.resolution,
+    'hasAudio': item.has_audio // Assuming you have a boolean field for audio
+  };
+  
+  let headers = {'Content-Type': 'application/json',
+  'formatid': "item.format_id",
+    'url': videoUrl, // Assuming you have a URL field in your items
+    'filename': item.title,
+    'resolution': item.resolution,
+    'hasAudio': item.has_audio, 
+    'formatid': item.format_id};
+
+
+
+   
+
+
+  fetch('/download/fullhd', {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(requestBody),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Download started:', data);
+    if(data.videolink) {
+      document.querySelector('.overlay').style.display = 'none';
+            hideProgressContainer();
+            initiateDownload(data.videolink);
+        } else {
+            throw new Error('Video link not found in response.');
+        }
+  })
+  .catch(error => {
+    hideProgressContainer();
+
+    console.error('Download error:', error);
+    downloadVideo22(item, videoUrl, generateRandomDigits(5))
+  });
+}
+
+function generateRandomDigits(n) {
+  const min = Math.pow(10, n-1);
+  const max = Math.pow(10, n) - 1;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+hideProgressContainer();
+
+function downloadVideo22(item, videoUrl, name) {
+   
+   hideProgressContainer();
+   setProgressNull();
+
+   showProgressContainer();
+   setprogress();
+ 
+  // Show the popup
+  // Prepare the request body based on the condition of need_format_id
+  let requestBody = {
+  };
+  
+  let headers = {'Content-Type': 'application/json',
+    'url': videoUrl, // Assuming you have a URL field in your items
+    'filename': name,
+    'resolution': item.resolution,
+    'formatid' : "item.format_id",
+    'hasAudio': item.has_audio,
+    'formatid' : item.format_id,};
+
+
+  fetch('/download/fullhd', {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(requestBody),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Download started:', data);
+    if(data.videolink) {
+      document.querySelector('.overlay').style.display = 'none';
+            hideProgressContainer();
+            initiateDownload(data.videolink);
+        } else {
+            throw new Error('Video link not found in response.');
+        }
+  })
+  .catch(error => {
+    hideProgressContainer();
+    setProgressNull();
+    console.error('Download error:', error);
+  });
+}
+
+
+
+</script>
+
+</body>
+</html>
+

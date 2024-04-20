@@ -468,6 +468,10 @@ def getSitemap():
 def main():
     return render_template('youtubedowloader1.html')
 
+@application.route("/es", methods=['GET'])
+def mainspanish():
+    return render_template('yt_spanish.html')
+
 @application.route("/privacypolicy", methods=['GET'])
 def mainprivacy():
     return render_template('privacypolicy.html')
