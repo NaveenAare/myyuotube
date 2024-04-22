@@ -501,6 +501,14 @@ def main():
 def mainspanish():
     return render_template('yt_spanish.html')
 
+@application.route("/de", methods=['GET'])
+def maingerman():
+    return render_template('german_yt.html')
+
+@application.route("/pt", methods=['GET'])
+def mainportugese():
+    return render_template('portuguese.html')
+
 @application.route("/privacypolicy", methods=['GET'])
 def mainprivacy():
     return render_template('privacypolicy.html')
