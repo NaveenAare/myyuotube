@@ -509,6 +509,12 @@ def maingerman():
 def mainportugese():
     return render_template('portuguese.html')
 
+
+
+@application.route("/shorts-downloader", methods=['GET'])
+def mainshorts():
+    return render_template('shorts.html')
+
 @application.route("/privacypolicy", methods=['GET'])
 def mainprivacy():
     return render_template('privacypolicy.html')
