@@ -497,6 +497,10 @@ def getSitemap():
 def main():
     return render_template('youtubedowloader1.html')
 
+@application.route("/lang/en/youtube-video-downloader", methods=['GET'])
+def main2():
+    return render_template('ytttt.html')
+
 @application.route("/es", methods=['GET'])
 def mainspanish():
     return render_template('yt_spanish.html')
