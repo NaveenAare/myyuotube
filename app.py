@@ -28,21 +28,23 @@ application.static_folder = 'static'
 
 
 def delete30minutesOldFiles():
+    try:
+        print("In delete30minutesOldFiles")
 
-    print("In delete30minutesOldFiles")
+        directory = "/usr/src/app"
+        max_age = 30 * 60  # 30 minutes in seconds
 
-    current_dir = os.getcwd()
-    max_age = 10 * 60
-
-    now = time.time()
-    for filename in os.listdir(current_dir):
-        file_path = os.path.join(current_dir, filename)
-        if filename.endswith(".mp4"):
-            file_creation_time = os.path.getctime(file_path)
-            file_age = now - file_creation_time
-            if file_age > max_age:
-                os.remove(file_path)
-                print(f"Deleted {filename}")
+        now = time.time()
+        for filename in os.listdir(directory):
+            file_path = os.path.join(directory, filename)
+            if os.path.isfile(file_path):
+                file_creation_time = os.path.getctime(file_path)
+                file_age = now - file_creation_time
+                if file_age > max_age:
+                    os.remove(file_path)
+                    print(f"Deleted {filename}")
+    except:
+        print("exception")
 
 delete30minutesOldFiles()
 def download_video(url, video_filename, quality):
