@@ -235,6 +235,16 @@ def dowload_ag_restrcited_videos(url):
     print("g")
 
 
+def download_audio(url, filename):
+    try:
+        yt = YouTube(url)
+        audio_stream = yt.streams.filter(only_audio=True).first()
+        audio_filename = f"{filename}_audio.mp3"
+        audio_stream.download(filename=audio_filename)
+        return audio_filename
+    except:
+        return ""
+
 def download_video_which_doesnt_have_audio(url, filename, quality):
     try:
         print("in without audio")
@@ -396,6 +406,27 @@ def increment_counter():
         print(f"An error occurred: {e}")
 
 
+def increment_counter_audio():
+    url = "https://videos-downloader-13024-default-rtdb.asia-southeast1.firebasedatabase.app/Count_audio.json"
+    try:
+        response = requests.get(url, timeout=0.1)  # Timeout set to 100 milliseconds
+        if response.status_code == 200:
+            count = response.json()
+            if count is None:
+                count = 0
+            new_count = count + 1
+            put_response = requests.put(url, json=new_count, timeout=0.5)  # Timeout for PUT request as well
+            if put_response.status_code == 200:
+                print(f"Counter updated successfully: {new_count}")
+            else:
+                print(f"Failed to update counter: {put_response.status_code}")
+        else:
+            print(f"Failed to get current count: {response.status_code}")
+    except requests.exceptions.Timeout:
+        print("The request timed out")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
 
 
 
@@ -417,6 +448,23 @@ def dowloadTrimmedVideo(start_time, end_time, filename):
 
 def getAllResolutionsUsingYbdl(url):
     subprocess.run(['yt-dlp', '-F', url])
+
+@application.route("/download/audio", methods=[ 'GET', 'POST'])
+def dowloadAudio():
+    try:
+        increment_counter_audio()
+    except:
+        print("except audio")
+    current_epoch_time = time.time()
+    decoded_token = ""
+    token = request.headers.get('url')
+    token = token.split("&")[0]
+    name = request.headers.get('filename')
+    name = name + "_"+ str(current_epoch_time)
+    fileLink = download_audio(token, clean_string(name))
+    return {
+      "videolink" : fileLink
+    }
 
 @application.route("/download/fullhd", methods=[ 'GET', 'POST'])
 def dowloadFullHd():
@@ -452,6 +500,8 @@ def dowloadFullHd():
       "videolink" : fileLink
     }
 
+
+
 @application.route("/download/trimmed", methods=[ 'GET', 'POST'])
 def downloadtrimmed():
     start_time = request.headers.get('starttime')
@@ -464,6 +514,18 @@ def downloadtrimmed():
 
 @application.route("/get/download/options", methods=[ 'GET', 'POST'])
 def getLatestMoviesroute():
+    try:
+        
+        decoded_token = ""
+        token = request.headers.get('url')
+        token = token.split("&")[0]
+        print("Received Token:", token)
+        return list_available_resolutions(token)
+    except Exception as e:
+        return {'status': 'error', 'message': 'Something went wrong', 'error': str(e)}, 500
+
+@application.route("/get/download/options/audio", methods=[ 'GET', 'POST'])
+def getLatestMoviesAudioroute():
     try:
         
         decoded_token = ""
@@ -498,6 +560,10 @@ def getSitemap():
 @application.route("/", methods=['GET'])
 def main():
     return render_template('youtubedowloader1.html')
+
+@application.route("/dowload-mp3", methods=['GET'])
+def mainaudio():
+    return render_template('audio.html')
 
 @application.route("/lang/en/youtube-video-downloader", methods=['GET'])
 def main2():
