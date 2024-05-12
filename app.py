@@ -565,6 +565,15 @@ def main():
 def mainaudio():
     return render_template('audio.html')
 
+@application.route("/dowload-mp3-es", methods=['GET'])
+def mainaudioes():
+    return render_template('audio_es.html')
+
+
+@application.route("/dowload-mp3-de", methods=['GET'])
+def mainaudiode():
+    return render_template('audio_de.html')
+
 @application.route("/lang/en/youtube-video-downloader", methods=['GET'])
 def main2():
     return render_template('ytttt.html')
