@@ -563,16 +563,16 @@ def getSitemap():
 def main():
     return render_template('youtubedowloader1.html')
 
-@application.route("/dowload-mp3", methods=['GET'])
+@application.route("/download-mp3", methods=['GET'])
 def mainaudio():
     return render_template('audio.html')
 
-@application.route("/dowload-mp3-es", methods=['GET'])
+@application.route("/download-mp3-es", methods=['GET'])
 def mainaudioes():
     return render_template('audio_es.html')
 
 
-@application.route("/dowload-mp3-de", methods=['GET'])
+@application.route("/download-mp3-de", methods=['GET'])
 def mainaudiode():
     return render_template('audio_de.html')
 
