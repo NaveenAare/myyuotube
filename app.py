@@ -27,22 +27,24 @@ application.static_folder = 'static'
 
 
 
+
 def delete30minutesOldFiles():
     try:
-        print("In delete30minutesOldFiles")
+        print("In delete_mp4_files_in_current_directory")
 
-        directory = "/usr/src/app"
-        max_age = 2 * 60  # 30 minutes in seconds
+        current_directory = os.getcwd()
+        max_age = 5 * 60  # 30 minutes in seconds
 
         now = time.time()
-        for filename in os.listdir(directory):
-            file_path = os.path.join(directory, filename)
-            if os.path.isfile(file_path) and filename.endswith(".mp4"):
-                file_creation_time = os.path.getctime(file_path)
-                file_age = now - file_creation_time
-                if file_age > max_age:
-                    os.remove(file_path)
-                    print(f"Deleted {filename}")
+        for filename in os.listdir(current_directory):
+            if filename.endswith(".mp4"):
+                file_path = os.path.join(current_directory, filename)
+                if os.path.isfile(file_path):
+                    file_creation_time = os.path.getctime(file_path)
+                    file_age = now - file_creation_time
+                    if file_age > max_age:
+                        os.remove(file_path)
+                        print(f"Deleted {filename}")
     except Exception as e:
         print(f"Exception: {e}")
 
@@ -610,7 +612,7 @@ def contactus():
 
 
 if __name__ == "__main__":
-    scheduler.add_job(id='Scheduled Task', func=delete30minutesOldFiles, trigger='interval', minutes=20)
+    scheduler.add_job(id='Scheduled Task', func=delete30minutesOldFiles, trigger='interval', minutes=1)
     scheduler.start()
     application.debug = True
     application.run()
