@@ -32,19 +32,19 @@ def delete30minutesOldFiles():
         print("In delete30minutesOldFiles")
 
         directory = "/usr/src/app"
-        max_age = 30 * 60  # 30 minutes in seconds
+        max_age = 2 * 60  # 30 minutes in seconds
 
         now = time.time()
         for filename in os.listdir(directory):
             file_path = os.path.join(directory, filename)
-            if os.path.isfile(file_path):
+            if os.path.isfile(file_path) and filename.endswith(".mp4"):
                 file_creation_time = os.path.getctime(file_path)
                 file_age = now - file_creation_time
                 if file_age > max_age:
                     os.remove(file_path)
                     print(f"Deleted {filename}")
-    except:
-        print("exception")
+    except Exception as e:
+        print(f"Exception: {e}")
 
 delete30minutesOldFiles()
 def download_video(url, video_filename, quality):
