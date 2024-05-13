@@ -612,7 +612,7 @@ def contactus():
 
 
 if __name__ == "__main__":
-    scheduler.add_job(id='Scheduled Task', func=delete30minutesOldFiles, trigger='interval', minutes=1)
+    scheduler.add_job(id='Scheduled Task', func=delete30minutesOldFiles, trigger='interval', minutes=30)
     scheduler.start()
     application.debug = True
     application.run()
