@@ -567,6 +567,10 @@ def main():
 def mainaudio():
     return render_template('audio.html')
 
+@application.route("/youtube-audio-downloader", methods=['GET'])
+def mainaudiotest():
+    return render_template('audio_2.html')
+
 @application.route("/download-mp3-es", methods=['GET'])
 def mainaudioes():
     return render_template('audio_es.html')
