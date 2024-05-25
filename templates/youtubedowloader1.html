@@ -1891,15 +1891,34 @@ function updateSelectedItem() {
   if (index !== -1) scrollItems[index].classList.add('selected');
 }
 
-function initiateDownload(downloadUrl) {
-    // This creates an anchor element (`<a>`) dynamically
-    var anchor = document.createElement('a');
-    anchor.href = "/Videos/images/" + downloadUrl;
-    anchor.download = ''; // Optional: Specify a filename for the download
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+function initiateDownload(downloadUrl, fileName) {
+    try {
+        // Create an anchor element dynamically
+        var anchor = document.createElement('a');
+        anchor.href = "/Videos/images/" + downloadUrl;
+
+        // Optional: Specify a filename for the download if provided
+        if (fileName) {
+            anchor.download = fileName;
+        } else {
+            anchor.download = ''; // This will default to the original filename from the URL
+        }
+
+        // Append the anchor to the body
+        document.body.appendChild(anchor);
+
+        // Trigger the download by programmatically clicking the anchor
+        anchor.click();
+
+        // Remove the anchor from the document
+        document.body.removeChild(anchor);
+
+        console.log('Download initiated successfully.');
+    } catch (error) {
+        console.error('Download error:', error);
+    }
 }
+
 
 function showProgressContainer() {
   document.querySelector('.progress-container').style.display = 'block';
