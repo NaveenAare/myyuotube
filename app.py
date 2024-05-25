@@ -275,8 +275,6 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         result = subprocess.run(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         if result.returncode == 0:
-            os.remove(video_filename)
-            os.remove(audio_filename)
             print("FFmpeg command executed successfully")
             return output_filename
     except Exception as e:
