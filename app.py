@@ -346,8 +346,6 @@ def dowload_age_restricted_videos_having_without_audio(url, format_id, output_fi
         #final_clip = video_clip.set_audio(audio_clip)
 
         #final_clip.write_videofile(output_filename.replace(".mp4", "_1.mp4"), codec="libx264", audio_codec="aac")
-        os.remove(output_filename)
-        os.remove(output_filename.replace(".mp4", "audio_.mp3"))
         print("FFmpeg command executed successfully")
         return ooutputfilename
     else:
