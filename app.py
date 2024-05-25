@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 from flask_apscheduler import APScheduler
 import subprocess
 import requests
-
+import threading
 
 
 application = Flask(__name__)
@@ -48,7 +48,7 @@ def delete30minutesOldFiles():
     except Exception as e:
         print(f"Exception: {e}")
 
-delete30minutesOldFiles()
+#delete30minutesOldFiles()
 def download_video(url, video_filename, quality):
     yt = YouTube(url)
     video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
@@ -465,38 +465,48 @@ def dowloadAudio():
     }
 
 @application.route("/download/fullhd", methods=[ 'GET', 'POST'])
-def dowloadFullHd():
-    try:
-        increment_counter()
-    except:
-        print("except")
-    current_epoch_time = time.time()
-    decoded_token = ""
-    token = request.headers.get('url')
-    token = token.split("&")[0]
-    name = request.headers.get('filename')
-    name = name + "_"+ str(current_epoch_time)
-    res = request.headers.get('resolution')
-    format_id = request.headers.get('formatid')
-    hasAudio = request.headers.get('hasAudio')
-    print("format_id :::::::::::" + str(format_id))
-    fileLink = ""
-    if(format_id == None or format_id == 'null'):
-        if(str(hasAudio) == "true"):
-            print("has audio" + str(hasAudio))
-            fileLink = download_video(token, clean_string(name) + ".mp4", res)
+def downloadFullHd():
+    lock = threading.Lock()
+    
+    def download_and_return():
+        try:
+            increment_counter()
+        except Exception as e:
+            print("Exception:", e)
+    
+        current_epoch_time = time.time()
+        decoded_token = ""
+        token = request.headers.get('url')
+        token = token.split("&")[0]
+        name = request.headers.get('filename')
+        name = name + "_"+ str(current_epoch_time)
+        res = request.headers.get('resolution')
+        format_id = request.headers.get('formatid')
+        hasAudio = request.headers.get('hasAudio')
+        print("format_id :::::::::::" + str(format_id))
+        fileLink = ""
+        if(format_id == None or format_id == 'null'):
+            if(str(hasAudio) == "true"):
+                print("has audio" + str(hasAudio))
+                fileLink = download_video(token, clean_string(name) + ".mp4", res)
+            else:
+                fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
         else:
-            fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
-    else:
-        if(str(hasAudio) == "true"):
-            fileLink = dowload_age_restricted_videos(token, int(format_id), clean_string(name) + ".mp4")
-        else:
-            fileLink = dowload_age_restricted_videos_having_without_audio(token, int(format_id), clean_string(name) + ".mp4")
+            if(str(hasAudio) == "true"):
+                fileLink = dowload_age_restricted_videos(token, int(format_id), clean_string(name) + ".mp4")
+            else:
+                fileLink = dowload_age_restricted_videos_having_without_audio(token, int(format_id), clean_string(name) + ".mp4")
         
+        with lock:
+            return {
+              "videolink" : fileLink
+            }
+    
+    # Run the function synchronously
+    result = download_and_return()
+    
+    return result
 
-    return {
-      "videolink" : fileLink
-    }
 
 
 
