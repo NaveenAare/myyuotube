@@ -365,21 +365,6 @@ def dowload_age_restricted_videos_having_without_audio(url, format_id, output_fi
 #subprocess.run(['yt-dlp', url])
 #download_video(url, "kgf.mp4")
 
-def extract_youtube_url(input_string):
-    youtube_regex = (
-        r'(https?://)?(www\.)?'
-        '(youtube|youtu|youtube-nocookie)\.(com|be)/'
-        '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})'
-    )
-    
-    match = re.search(youtube_regex, input_string)
-    if match:
-        # Construct a proper URL from the extracted video ID
-        video_id = match.group(6)  # Extracting the video ID
-        youtube_url = f"https://www.youtube.com/watch?v={video_id}"
-        return youtube_url
-    else:
-        return "No valid YouTube URL found."
 
 
 def increment_counter():
@@ -523,7 +508,6 @@ def downloadtrimmed():
 @application.route("/get/download/options", methods=[ 'GET', 'POST'])
 def getLatestMoviesroute():
     try:
-        
         decoded_token = ""
         token = request.headers.get('url')
         token = token.split("&")[0]
