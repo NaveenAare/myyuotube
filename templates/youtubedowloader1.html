@@ -1540,19 +1540,19 @@ For the tech-savvy, our tool offers advanced functionalities. Choose the video r
     <div class="testimonials-container">
         <div class="testimonial" id="testimonial1">
             <img src="static/im2.png" alt="Person Name">
-            <p class="testimonial-name">Alex Johnson</p>
+            <p class="testimonial-name">Nick</p>
             <p class="testimonial-rating">⭐⭐⭐⭐⭐</p>
-            <p class="testimonial-text">"This YouTube video downloader is fantastic! It's fast, easy to use, and gets me the videos I need in no time."</p>
+            <p class="testimonial-text">"One of the best and fast youtube videos downloader i have ever seen."</p>
         </div>
         <div class="testimonial" id="testimonial2">
             <img src="static/barbie.png" alt="Person Name">
-            <p class="testimonial-name">Varsha</p>
+            <p class="testimonial-name">Hima Varsha</p>
             <p class="testimonial-rating">⭐⭐⭐⭐</p>
-            <p class="testimonial-text">"I've tried many downloaders, but this one truly stands out. Highly recommended!"</p>
+            <p class="testimonial-text">"I've tried many downloaders, but this one truly stands out. Highly recommended! thanks for the developers"</p>
         </div>
         <div class="testimonial" id="testimonial2">
             <img src="static/hanuman.jpg" alt="Person Name">
-            <p class="testimonial-name">Pavanputra</p>
+            <p class="testimonial-name">Hanuman</p>
             <p class="testimonial-rating">⭐⭐⭐⭐⭐</p>
             <p class="testimonial-text">"This YouTube video downloader is incredibly easy to use and fast. It has made downloading videos a breeze for me!"</p>
         </div>
@@ -2031,6 +2031,13 @@ function downloadVideo22(item, videoUrl, name) {
   // Show the popup
   // Prepare the request body based on the condition of need_format_id
   let requestBody = {
+    'Content-Type': 'application/json',
+    'url': videoUrl, // Assuming you have a URL field in your items
+    'filename': name,
+    'resolution': item.resolution,
+    'formatid' : "item.format_id",
+    'hasAudio': item.has_audio,
+    'formatid' : item.format_id,
   };
   
   let headers = {'Content-Type': 'application/json',
