@@ -317,6 +317,22 @@ def dowload_age_restricted_videos(url, format_id, output_filename):
         print("Download failed:", result.stderr)
         return ""
 
+def audioForallVideos(url, output_filename):
+    try:
+        commandToDownloadAudio = ['yt-dlp', '-f', 'bestaudio', '--extract-audio', '--audio-format', 'mp3', url]
+        if output_filename:
+            commandToDownloadAudio += ['-o', output_filename.replace(".mp4", "audio_")]
+        result = subprocess.run(commandToDownloadAudio, capture_output=True, text=True)
+
+        print(f"Download successful  ${output_filename}")
+        audifilename = output_filename.replace(".mp4", "audio_.mp3")
+        return audifilename+ ".mp3"
+    except Exception as e:
+        print(str(e))
+        return ""
+
+    
+
 def dowload_age_restricted_videos_having_without_audio(url, format_id, output_filename):
     print("In age rest without audio")
     command = ['yt-dlp', '-f', str(format_id), url]
@@ -445,6 +461,8 @@ def dowloadAudio():
     name = request.headers.get('filename')
     name = name + "_"+ str(current_epoch_time)
     fileLink = download_audio(token, clean_string(name))
+    if(fileLink == ""):
+        fileLink = audioForallVideos(token, clean_string(name))
     return {
       "videolink" : fileLink
     }
