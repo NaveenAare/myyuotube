@@ -381,6 +381,59 @@ def dowload_age_restricted_videos_having_without_audio(url, format_id, output_fi
 #subprocess.run(['yt-dlp', url])
 #download_video(url, "kgf.mp4")
 
+def increment_counter_byDate():
+    # Get the current date in YYYY-MM-DD format
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    url = f"https://videos-downloader-13024-default-rtdb.asia-southeast1.firebasedatabase.app/Count/{current_date}.json"
+
+    try:
+        # GET request to check the current value of the counter
+        response = requests.get(url, timeout=0.1)  # Timeout set to 100 milliseconds
+        if response.status_code == 200:
+            count = response.json()
+            if count is None:
+                count = 0
+            new_count = count + 1
+
+            # PUT request to update the counter value
+            put_response = requests.put(url, json=new_count, timeout=0.5)  # Timeout for PUT request as well
+            if put_response.status_code == 200:
+                print(f"Counter updated successfully: {new_count}")
+            else:
+                print(f"Failed to update counter: {put_response.status_code}")
+        else:
+            print(f"Failed to get current count: {response.status_code}")
+    except requests.exceptions.Timeout:
+        print("The request timed out")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
+def increment_counter_forAudio_byDate():
+    # Get the current date in YYYY-MM-DD format
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    url = f"https://videos-downloader-13024-default-rtdb.asia-southeast1.firebasedatabase.app/Count_audio/{current_date}.json"
+
+    try:
+        # GET request to check the current value of the counter
+        response = requests.get(url, timeout=0.1)  # Timeout set to 100 milliseconds
+        if response.status_code == 200:
+            count = response.json()
+            if count is None:
+                count = 0
+            new_count = count + 1
+
+            # PUT request to update the counter value
+            put_response = requests.put(url, json=new_count, timeout=0.5)  # Timeout for PUT request as well
+            if put_response.status_code == 200:
+                print(f"Counter updated successfully: {new_count}")
+            else:
+                print(f"Failed to update counter: {put_response.status_code}")
+        else:
+            print(f"Failed to get current count: {response.status_code}")
+    except requests.exceptions.Timeout:
+        print("The request timed out")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
 
 
 def increment_counter():
@@ -451,7 +504,7 @@ def getAllResolutionsUsingYbdl(url):
 @application.route("/download/audio", methods=[ 'GET', 'POST'])
 def dowloadAudio():
     try:
-        increment_counter_audio()
+        increment_counter_forAudio_byDate()
     except:
         print("except audio")
     current_epoch_time = time.time()
@@ -473,7 +526,7 @@ def downloadFullHd():
     
     def download_and_return():
         try:
-            increment_counter()
+            increment_counter_byDate()
         except Exception as e:
             print("Exception:", e)
     
