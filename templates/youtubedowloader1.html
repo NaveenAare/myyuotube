@@ -1882,7 +1882,31 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
       const buttonItem = document.createElement('li');
       const downloadButton = document.createElement('button');
       downloadButton.className = 'neu-button';
-      if(resolutionsList.includes(item.resolution)){
+      if(item.has_audio){
+        const spanBefore = document.createElement('span');
+        let filesize = ""
+        if(item.filesize != 'Null'){
+            filesize = `- (size ${item.filesize})`;
+        }
+        spanBefore.textContent = `${item.resolution} ${filesize}`;
+        spanBefore.style.fontFamily = 'Arial';
+        spanBefore.style.fontWeight = 'bold';
+
+
+
+        const textFastDownload = document.createElement('span');
+        textFastDownload.textContent = '-Instant download';
+        spanBefore.style.fontWeight = 'bold';
+        const textAfter = document.createTextNode('⚡⬇️');
+
+        textFastDownload.style.color = 'green';
+        textFastDownload.style.fontFamily = 'Courier';
+        textFastDownload.style.fontWeight = 'bold';
+
+        downloadButton.appendChild(spanBefore);
+        downloadButton.appendChild(textFastDownload);
+        downloadButton.appendChild(textAfter);
+      } else if(resolutionsList.includes(item.resolution)){
         const spanBefore = document.createElement('span');
         let filesize = ""
         if(item.filesize != 'Null'){
