@@ -200,7 +200,7 @@ def list_available_resolutions_for_restricted_content(url):
 
             format_details = []
 
-            if(duration > 300):
+            if(duration > 900):
                 filtered_formats = [format for format in formats if (format.get("format_note") in desired_format_notes and getAudioStatus(format.get("acodec")))]
                 filtered_formats = filtered_formats[::-1]
             else:
