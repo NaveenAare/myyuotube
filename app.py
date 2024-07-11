@@ -78,6 +78,9 @@ def bytes_to_mb(size_in_bytes):
             return "Null"
     except Exception as e:
         return "Null"
+
+
+
     
 def list_available_resolutions(url):
     try:      
@@ -178,6 +181,7 @@ def list_available_resolutions_for_restricted_content(url):
 
             print(f"The duration of the video is {duration} seconds.")
 
+
             format_details = []
 
             if(duration > 300):
@@ -200,7 +204,9 @@ def list_available_resolutions_for_restricted_content(url):
                     "has_audio": getAudioStatus(format.get("acodec")),
                 }
                 format_details.append(detail)
-            reversed_unique_formats = sorted(filter_unique_resolutions(format_details), key=lambda x: not x['has_audio'])
+            reversed_unique_formats1 = sorted(filter_unique_resolutions(format_details), key=lambda x: not x['has_audio'])
+            reversed_unique_formats = sorted(format_details, key=lambda x: not x['has_audio'])
+
             formats_json = json.dumps(reversed_unique_formats, indent=4)
             print(formats_json)
             return str(formats_json)
@@ -212,6 +218,9 @@ def list_available_resolutions_for_restricted_content(url):
               "message": "Something went wrong"
 
             }
+
+
+
 
 def get_title_and_thumbnail(video_url):
     yt = YouTube(video_url)
@@ -380,6 +389,37 @@ def dowload_age_restricted_videos_having_without_audio(url, format_id, output_fi
 
 #subprocess.run(['yt-dlp', url])
 #download_video(url, "kgf.mp4")
+
+
+
+def increment_counter_error_byDate():
+    # Get the current date in YYYY-MM-DD format
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    url = f"https://videos-downloader-13024-default-rtdb.asia-southeast1.firebasedatabase.app/Error_Count/{current_date}.json"
+
+    try:
+        # GET request to check the current value of the counter
+        response = requests.get(url, timeout=0.1)  # Timeout set to 100 milliseconds
+        if response.status_code == 200:
+            count = response.json()
+            if count is None:
+                count = 0
+            new_count = count + 1
+
+            # PUT request to update the counter value
+            put_response = requests.put(url, json=new_count, timeout=0.5)  # Timeout for PUT request as well
+            if put_response.status_code == 200:
+                print(f"Counter updated successfully: {new_count}")
+            else:
+                print(f"Failed to update counter: {put_response.status_code}")
+        else:
+            print(f"Failed to get current count: {response.status_code}")
+    except requests.exceptions.Timeout:
+        print("The request timed out")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
+
 
 def increment_counter_byDate():
     # Get the current date in YYYY-MM-DD format
@@ -583,8 +623,12 @@ def getLatestMoviesroute():
         token = request.headers.get('url')
         token = token.split("&")[0]
         print("Received Token:", token)
-        return list_available_resolutions(token)
+        return list_available_resolutions_for_restricted_content(token)
     except Exception as e:
+        try:
+            increment_counter_error_byDate()
+        except Exception as e:
+            print("Exception:", e)
         return {'status': 'error', 'message': 'Something went wrong', 'error': str(e)}, 500
 
 @application.route("/get/download/options/audio", methods=[ 'GET', 'POST'])

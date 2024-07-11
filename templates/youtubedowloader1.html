@@ -1861,6 +1861,9 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
   videoThumbnail.src = '';
   videoTitle.textContent = '';
 
+  const resolutionsList = ["240p", "360p", "480p"];
+
+
   // Show loader, hide previous content containers
   videoInfoCard.style.display = 'none'; // Hide the video info card until new data is loaded
 
@@ -1879,7 +1882,7 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
       const buttonItem = document.createElement('li');
       const downloadButton = document.createElement('button');
       downloadButton.className = 'neu-button';
-      if(item.has_audio){
+      if(resolutionsList.includes(item.resolution)){
         const spanBefore = document.createElement('span');
         let filesize = ""
         if(item.filesize != 'Null'){
