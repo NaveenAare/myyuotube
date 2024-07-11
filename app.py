@@ -153,7 +153,7 @@ def list_available_resolutions(url):
 def getAudioStatus(value):
     return value != "none"
 
-def filter_unique_resolutions(formats):
+def filter_unique_resolutionssss(formats):
     seen_resolutions = set()
     unique_formats = []
     for format in formats:
@@ -161,6 +161,22 @@ def filter_unique_resolutions(formats):
         if resolution not in seen_resolutions:
             seen_resolutions.add(resolution)
             unique_formats.append(format)
+    return unique_formats
+
+def filter_unique_resolutions(formats):
+    seen_resolutions = set()
+    unique_formats = []
+    
+    for format in formats:
+        resolution = format.get("resolution")
+        has_audio = format.get("has_audio")
+        
+        if resolution not in seen_resolutions or has_audio:
+            if not has_audio:
+                seen_resolutions.add(resolution)
+            unique_formats.append(format)
+    print(formats)
+    
     return unique_formats
 
 
@@ -204,8 +220,8 @@ def list_available_resolutions_for_restricted_content(url):
                     "has_audio": getAudioStatus(format.get("acodec")),
                 }
                 format_details.append(detail)
-            reversed_unique_formats1 = sorted(filter_unique_resolutions(format_details), key=lambda x: not x['has_audio'])
-            reversed_unique_formats = sorted(format_details, key=lambda x: not x['has_audio'])
+            reversed_unique_formats = sorted(filter_unique_resolutions(format_details), key=lambda x: not x['has_audio'])
+            reversed_unique_formats1 = sorted(format_details, key=lambda x: not x['has_audio'])
 
             formats_json = json.dumps(reversed_unique_formats, indent=4)
             print(formats_json)
