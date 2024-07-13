@@ -435,6 +435,33 @@ def increment_counter_error_byDate():
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
 
+def increment_counter_Success_rate_byDate():
+    # Get the current date in YYYY-MM-DD format
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    url = f"https://videos-downloader-13024-default-rtdb.asia-southeast1.firebasedatabase.app/Success_downloads/{current_date}.json"
+
+    try:
+        # GET request to check the current value of the counter
+        response = requests.get(url, timeout=0.2)  # Timeout set to 100 milliseconds
+        if response.status_code == 200:
+            count = response.json()
+            if count is None:
+                count = 0
+            new_count = count + 1
+
+            # PUT request to update the counter value
+            put_response = requests.put(url, json=new_count, timeout=0.5)  # Timeout for PUT request as well
+            if put_response.status_code == 200:
+                print(f"Counter updated successfully: {new_count}")
+            else:
+                print(f"Failed to update counter: {put_response.status_code}")
+        else:
+            print(f"Failed to get current count: {response.status_code}")
+    except requests.exceptions.Timeout:
+        print("The request timed out")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
 
 
 def increment_counter_byDate():
@@ -639,7 +666,8 @@ def getLatestMoviesroute():
         token = request.headers.get('url')
         token = token.split("&")[0]
         print("Received Token:", token)
-        return list_available_resolutions_for_restricted_content(token)
+        return list_available_resolutions(token)
+        #return list_available_resolutions_for_restricted_content(token)
     except Exception as e:
         try:
             increment_counter_error_byDate()
@@ -650,7 +678,6 @@ def getLatestMoviesroute():
 @application.route("/get/download/options/audio", methods=[ 'GET', 'POST'])
 def getLatestMoviesAudioroute():
     try:
-        
         decoded_token = ""
         token = request.headers.get('url')
         token = token.split("&")[0]
@@ -666,6 +693,10 @@ def get_video(filename):
 
 @application.route('/Videos/images/<filename>')
 def get_image(filename):
+    try:
+        increment_counter_Success_rate_byDate()
+    except Exception as e:
+        print("Exception:", e)
     directory = ''
     response = send_from_directory(directory, filename)
     
