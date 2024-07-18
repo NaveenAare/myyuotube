@@ -181,7 +181,19 @@ def list_available_resolutions_for_restricted_content(url):
     print("in age res")
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
 
-    process = subprocess.run(['yt-dlp', '-j', url], capture_output=True, text=True)
+    cookies_file = "cookies.txt"
+
+
+    #process = subprocess.run(['yt-dlp', '-j', url], capture_output=True, text=True)
+    process = subprocess.run([
+    'yt-dlp', 
+    '--cookies', cookies_file, 
+    '--user-agent', 'firefox', 
+    '--sleep-interval', '2', 
+    '--max-sleep-interval', '10', 
+    '-j', 
+    url
+], capture_output=True, text=True)
     print(process.stderr)
     errror = ""
     if process.returncode == 0:
