@@ -1206,6 +1206,22 @@ nav ul li {
 }
 
 
+.scrolling-notice {
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing content */
+  position: relative;
+  animation: scroll 20s linear infinite; /* Adjust duration and timing as needed */
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 
 nav ul li a:hover {
     background: linear-gradient(to right, #D4145A, #FBB03B);
@@ -1226,7 +1242,7 @@ nav ul li a:hover {
 <h1>YouTube Video Downloader - 1080p, MP4, MP3, 4K for Free</h1>
 
 
-
+<h3 style="color:Red">Notice: We are facing some issue.we will resume service in short time</h3>
 
 <header>
         <nav>
