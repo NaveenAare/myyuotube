@@ -180,7 +180,7 @@ def filter_unique_resolutions(formats):
 def list_available_resolutions_for_restricted_content(url):
     print("in age res")
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
-    cookies_file = 'cookises.txt'
+    cookies_file = 'cookies.txt'
     if os.path.exists(cookies_file):
         print(f"Cookies file '{cookies_file}' exists.")
     
