@@ -85,9 +85,7 @@ def bytes_to_mb(size_in_bytes):
 def list_available_resolutions(url):
     try:      
         yt = YouTube(url)
-    # Fetch all streams with file extension 'mp4'
         streams = yt.streams.filter(file_extension='mp4').order_by('resolution')
-        # Initialize an empty dictionary to store resolution details
         resolution_details = {}
         
         for stream in streams:
@@ -98,8 +96,6 @@ def list_available_resolutions(url):
                     "format_id": stream.itag  # Include format id
                 }
         
-        # Sort the resolutions in descending order
-
         sorted_resolutions = []
         sorted_resolutions = sorted(resolution_details.items(), key=lambda x: int(x[0][:-1]), reverse=True)
         
@@ -666,8 +662,8 @@ def getLatestMoviesroute():
         token = request.headers.get('url')
         token = token.split("&")[0]
         print("Received Token:", token)
-        return list_available_resolutions(token)
-        #return list_available_resolutions_for_restricted_content(token)
+        #return list_available_resolutions(token)
+        return list_available_resolutions_for_restricted_content(token)
     except Exception as e:
         try:
             increment_counter_error_byDate()
