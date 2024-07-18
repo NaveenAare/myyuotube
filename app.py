@@ -180,8 +180,22 @@ def filter_unique_resolutions(formats):
 def list_available_resolutions_for_restricted_content(url):
     print("in age res")
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
-    cookies_file = 'cookies.txt'
+    cookies_file = 'cookises.txt'
+    if os.path.exists(cookies_file):
+        print(f"Cookies file '{cookies_file}' exists.")
+    
+        with open(cookies_file, 'r') as file:
+            lines = file.readlines()
+            print("Cookies file content preview (first 10 lines):")
+            for line in lines[:10]:  # Print only the first 10 lines for preview
+                print(line.strip())
+    else:
+        print(f"Cookies file '{cookies_file}' does not exist or is not accessible.")
+        return {
+              "status" : False,
+              "message": "No file"
 
+            }
     process = subprocess.run(['yt-dlp','--cookies', cookies_file, '-j', url], capture_output=True, text=True)
     print(process.stderr)
     errror = ""
