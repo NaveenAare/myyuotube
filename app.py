@@ -231,7 +231,7 @@ def list_available_resolutions_for_restricted_content(url):
     else:
         return {
               "status" : False,
-              "message": errror
+              "message": str(process.stderr)
 
             }
 
