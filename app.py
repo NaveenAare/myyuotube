@@ -175,12 +175,13 @@ def filter_unique_resolutions(formats):
     
     return unique_formats
 
-cookies_file = 'cookies.txt'
 
 
 def list_available_resolutions_for_restricted_content(url):
     print("in age res")
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
+    cookies_file = 'cookies.txt'
+
     process = subprocess.run(['yt-dlp','--cookies', cookies_file, '-j', url], capture_output=True, text=True)
     print(process.stderr)
     errror = ""
