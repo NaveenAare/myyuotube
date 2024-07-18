@@ -180,52 +180,12 @@ def filter_unique_resolutions(formats):
 def list_available_resolutions_for_restricted_content(url):
     print("in age res")
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
-    cookies_file = 'cookies.json'
-    cookie_string = ''
-    try:
-        cookies_data = [
-            {
-                "Host raw": "https://.youtube.com/",
-                "Name raw": "VISITOR_PRIVACY_METADATA",
-                "Path raw": "/",
-                "Content raw": "CgJJThIEGgAgJQ%3D%3D",
-                "Expires": "14-01-2025 07:46:01",
-                "Expires raw": "1736820961",
-                "Send for": "Encrypted connections only",
-                "Send for raw": "true",
-                "HTTP only raw": "true",
-                "SameSite raw": "no_restriction",
-                "This domain only": "Valid for subdomains",
-                "This domain only raw": "false",
-                "Store raw": "firefox-default",
-                "First Party Domain": ""
-            }
-        ]
 
-        try:
-            cookies = json.loads(json.dumps(cookies_data))
-            cookie_strings = [f"{cookie['Name raw']}={cookie['Content raw']}" for cookie in cookies]
-            cookie_string = '; '.join(cookie_strings)
-        except Exception as e:
-            print(str(e))
-    except Exception as e:
-        print(str(e))
-
-    proxy = 'http://123.45.67.89:8080'  # Example public proxy server address and port
-
-
-    print(f"cooooookie  ${cookie_string}")
-    cookies_directory = "/root/.config/google-chrome/"
-
-    process = subprocess.run([
-    'yt-dlp',
-    '-j', url
-], capture_output=True, text=True)
+    process = subprocess.run(['yt-dlp', '-j', url], capture_output=True, text=True)
     print(process.stderr)
     errror = ""
     if process.returncode == 0:
         try:
-            print("in side")
             video_info = json.loads(process.stdout)
             formats = video_info.get('formats', [])
             thumbnail_url = video_info.get('thumbnail', '')
@@ -706,8 +666,8 @@ def getLatestMoviesroute():
         token = request.headers.get('url')
         token = token.split("&")[0]
         print("Received Token:", token)
-        return list_available_resolutions(token)
-        #return list_available_resolutions_for_restricted_content(token)
+        #return list_available_resolutions(token)
+        return list_available_resolutions_for_restricted_content(token)
     except Exception as e:
         try:
             increment_counter_error_byDate()
