@@ -214,10 +214,12 @@ def list_available_resolutions_for_restricted_content(url):
     proxy = 'http://123.45.67.89:8080'  # Example public proxy server address and port
 
 
-    print(f"cooooookie  ${str(cookie_strings)}")
+    print(f"cooooookie  ${cookie_strings}")
+    cookies_directory = "/root/.config/google-chrome/"
+
     process = subprocess.run([
     'yt-dlp',
-    '--cookies-from-browser', 'chrome',
+    '--cookies', str(cookie_strings),
     '-j', url
 ], capture_output=True, text=True)
     print(process.stderr)
