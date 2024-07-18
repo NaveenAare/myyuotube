@@ -181,7 +181,7 @@ def list_available_resolutions_for_restricted_content(url):
     print("in age res")
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
     cookies_file = 'cookies.json'
-    cookie_strings = ''
+    cookie_string = ''
     try:
         cookies_data = [
             {
@@ -214,12 +214,11 @@ def list_available_resolutions_for_restricted_content(url):
     proxy = 'http://123.45.67.89:8080'  # Example public proxy server address and port
 
 
-    print(f"cooooookie  ${cookie_strings}")
+    print(f"cooooookie  ${cookie_string}")
     cookies_directory = "/root/.config/google-chrome/"
 
     process = subprocess.run([
     'yt-dlp',
-    '--cookies', str(cookie_strings),
     '-j', url
 ], capture_output=True, text=True)
     print(process.stderr)
