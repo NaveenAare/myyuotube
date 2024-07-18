@@ -188,7 +188,6 @@ def list_available_resolutions_for_restricted_content(url):
     process = subprocess.run([
     'yt-dlp', 
     '--cookies', cookies_file, 
-    '--user-agent', 'firefox', 
     '--sleep-interval', '2', 
     '--max-sleep-interval', '10', 
     '-j', 
