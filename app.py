@@ -181,6 +181,8 @@ def list_available_resolutions_for_restricted_content(url):
     print("in age res")
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
     cookies_file = 'cookies.txt'
+    proxy = 'http://123.45.67.89:8080'  # Example public proxy server address and port
+
     if os.path.exists(cookies_file):
         print(f"Cookies file '{cookies_file}' exists.")
     
@@ -196,7 +198,12 @@ def list_available_resolutions_for_restricted_content(url):
               "message": "No file"
 
             }
-    process = subprocess.run(['yt-dlp','--cookies', cookies_file, '-j', url], capture_output=True, text=True)
+    process = subprocess.run(  [
+        'yt-dlp',
+        '--cookies', cookies_file,
+        '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        '-j', url
+    ], capture_output=True, text=True)
     print(process.stderr)
     errror = ""
     if process.returncode == 0:
@@ -681,8 +688,8 @@ def getLatestMoviesroute():
         token = request.headers.get('url')
         token = token.split("&")[0]
         print("Received Token:", token)
-        #return list_available_resolutions(token)
-        return list_available_resolutions_for_restricted_content(token)
+        return list_available_resolutions(token)
+        #return list_available_resolutions_for_restricted_content(token)
     except Exception as e:
         try:
             increment_counter_error_byDate()
