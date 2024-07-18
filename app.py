@@ -215,12 +215,11 @@ def list_available_resolutions_for_restricted_content(url):
 
 
     print(f"cooooookie  ${str(cookie_strings)}")
-    process = subprocess.run(  [
-        'yt-dlp',
-        '--cookies', cookie_string,
-        '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        '-j', url
-    ], capture_output=True, text=True)
+    process = subprocess.run([
+    'yt-dlp',
+    '--cookies-from-browser', 'chrome',
+    '-j', url
+], capture_output=True, text=True)
     print(process.stderr)
     errror = ""
     if process.returncode == 0:
