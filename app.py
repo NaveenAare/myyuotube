@@ -27,6 +27,7 @@ application.static_folder = 'static'
 
 
 
+cookies_file = "youtube.com_cookies.txt"
 
 def delete30minutesOldFiles():
     try:
@@ -298,7 +299,6 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         #os.remove(audio_filename)
 
 
-        cookies_file = "youtube.com_cookies.txt"
 
         result = subprocess.run(ffmpeg_command, '--cookies', cookies_file, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
@@ -333,7 +333,7 @@ def clean_string(input_string):
     return cleaned_string.replace(" ", "_")
 
 def dowload_age_restricted_videos(url, format_id, output_filename):
-    command = ['yt-dlp', '-f', str(format_id), url]
+    command = ['yt-dlp', '--cookies', cookies_file, '-f', str(format_id), url]
     if output_filename:
         command += ['-o', output_filename]
     result = subprocess.run(command, capture_output=True, text=True)
@@ -347,7 +347,7 @@ def dowload_age_restricted_videos(url, format_id, output_filename):
 
 def audioForallVideos(url, output_filename):
     try:
-        commandToDownloadAudio = ['yt-dlp', '-f', 'bestaudio', '--extract-audio', '--audio-format', 'mp3', url]
+        commandToDownloadAudio = ['yt-dlp', '--cookies', cookies_file, '-f', 'bestaudio', '--extract-audio', '--audio-format', 'mp3', url]
         if output_filename:
             commandToDownloadAudio += ['-o', output_filename.replace(".mp4", "audio_")]
         result = subprocess.run(commandToDownloadAudio, capture_output=True, text=True)
@@ -363,8 +363,9 @@ def audioForallVideos(url, output_filename):
 
 def dowload_age_restricted_videos_having_without_audio(url, format_id, output_filename):
     print("In age rest without audio")
-    command = ['yt-dlp', '-f', str(format_id), url]
-    commandToDownloadAudio = ['yt-dlp', '-f', 'bestaudio', '--extract-audio', '--audio-format', 'mp3', url]
+
+    command = ['yt-dlp', '--cookies', cookies_file, '-f', str(format_id), url]
+    commandToDownloadAudio = ['yt-dlp', '--cookies', cookies_file, '-f', 'bestaudio', '--extract-audio', '--audio-format', 'mp3', url]
 
     if output_filename:
         command += ['-o', output_filename]
@@ -669,8 +670,8 @@ def getLatestMoviesroute():
         token = request.headers.get('url')
         token = token.split("&")[0]
         print("Received Token:", token)
-        return list_available_resolutions(token)
-        #return list_available_resolutions_for_restricted_content(token)
+        #return list_available_resolutions(token)
+        return list_available_resolutions_for_restricted_content(token)
     except Exception as e:
         try:
             increment_counter_error_byDate()
