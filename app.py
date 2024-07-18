@@ -297,8 +297,10 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         #os.remove(video_filename)
         #os.remove(audio_filename)
 
-          
-        result = subprocess.run(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+        cookies_file = "youtube.com_cookies.txt"
+
+        result = subprocess.run(ffmpeg_command, '--cookies', cookies_file, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         if result.returncode == 0:
             print("FFmpeg command executed successfully")
