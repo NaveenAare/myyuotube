@@ -182,12 +182,8 @@ def list_available_resolutions(url):
     except Exception as e:
         try:
             print(f"Hbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb  {e}")
-            #return list_available_resolutions_for_restricted_content(url)
-            return {
-              "status" : False,
-              "message": str(e)
-
-            }
+            return list_available_resolutions_for_restricted_content(url)
+            
         except Exception as e:
             return {
               "status" : False,
@@ -233,7 +229,7 @@ def list_available_resolutions_for_restricted_content(url):
     desired_format_notes = ["240p", "360p", "480p", "720p", "1080p"]
     cookies_file = "youtube.com_cookies.txt"
     #process = subprocess.run(['yt-dlp', '-j', url], capture_output=True, text=True)
-    process = subprocess.run(['yt-dlp', '--cookies', cookies_file, '-j', url], capture_output=True, text=True)
+    process = subprocess.run(['yt-dlp', '-j', url], capture_output=True, text=True)
     print(process.stderr)
     errror = ""
     if process.returncode == 0:
