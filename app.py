@@ -1,3 +1,48 @@
+import logging
+from pytube import YouTube
+from pytube.innertube import _default_clients
+from pytube import cipher
+import re
+
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+
+_default_clients["ANDROID"]["context"]["client"]["clientVersion"] = "19.08.35"
+_default_clients["IOS"]["context"]["client"]["clientVersion"] = "19.08.35"
+_default_clients["ANDROID_EMBED"]["context"]["client"]["clientVersion"] = "19.08.35"
+_default_clients["IOS_EMBED"]["context"]["client"]["clientVersion"] = "19.08.35"
+_default_clients["IOS_MUSIC"]["context"]["client"]["clientVersion"] = "6.41"
+_default_clients["ANDROID_MUSIC"] = _default_clients["ANDROID_CREATOR"]
+
+def get_throttling_function_name(js: str) -> str:
+    function_patterns = [
+        r'a\.[a-zA-Z]\s*&&\s*\([a-z]\s*=\s*a\.get\("n"\)\)\s*&&\s*'
+        r'\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])?\([a-z]\)',
+        r'\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])\([a-z]\)',
+    ]
+    for pattern in function_patterns:
+        regex = re.compile(pattern)
+        function_match = regex.search(js)
+        if function_match:
+            if len(function_match.groups()) == 1:
+                return function_match.group(1)
+            idx = function_match.group(2)
+            if idx:
+                idx = idx.strip("[]")
+                array = re.search(
+                    r'var {nfunc}\s*=\s*(\[.+?\]);'.format(
+                        nfunc=re.escape(function_match.group(1))),
+                    js
+                )
+                if array:
+                    array = array.group(1).strip("[]").split(",")
+                    array = [x.strip() for x in array]
+                    return array[int(idx)]
+
+    raise Exception("Could not find throttling function name")
+
+cipher.get_throttling_function_name = get_throttling_function_name
+
 import pytube
 import ffmpeg
 from pytube import YouTube
@@ -137,7 +182,12 @@ def list_available_resolutions(url):
     except Exception as e:
         try:
             print(f"Hbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb  {e}")
-            return list_available_resolutions_for_restricted_content(url)
+            #return list_available_resolutions_for_restricted_content(url)
+            return {
+              "status" : False,
+              "message": str(e)
+
+            }
         except Exception as e:
             return {
               "status" : False,
@@ -670,8 +720,8 @@ def getLatestMoviesroute():
         token = request.headers.get('url')
         token = token.split("&")[0]
         print("Received Token:", token)
-        #return list_available_resolutions(token)
-        return list_available_resolutions_for_restricted_content(token)
+        return list_available_resolutions(token)
+        #return list_available_resolutions_for_restricted_content(token)
     except Exception as e:
         try:
             increment_counter_error_byDate()
