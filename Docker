@@ -7,44 +7,6 @@ WORKDIR /usr/src/app
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
-
-RUN apt-get update && apt-get install -y \
-    wget \
-    build-essential \
-    libssl-dev \
-    libffi-dev \
-    zlib1g-dev \
-    libncurses5-dev \
-    libncursesw5-dev \
-    libreadline-dev \
-    libsqlite3-dev \
-    libgdbm-dev \
-    libc6-dev \
-    libbz2-dev \
-    uuid-dev \
-    tk-dev \
-    libdb-dev \
-    libexpat1-dev \
-    liblzma-dev \
-    llvm \
-    libxml2-dev \
-    libxmlsec1-dev \
-    libffi-dev \
-    curl \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Python 3.8.10 from source
-RUN wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz \
-    && tar xzf Python-3.8.10.tgz \
-    && cd Python-3.8.10 \
-    && ./configure --enable-optimizations \
-    && make altinstall
-
-# Clean up
-RUN rm -rf Python-3.8.10 Python-3.8.10.tgz
-
-
 # Install ffmpeg
 RUN apt-get update && apt-get install -y ffmpeg && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -59,5 +21,4 @@ ENV NAME World
 
 # Run app.py when the container launches
 CMD ["gunicorn", "--workers=3", "--bind", "0.0.0.0:8080", "app:application"]
-
 
