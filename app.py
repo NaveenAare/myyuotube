@@ -1,5 +1,6 @@
 import logging
-from pytube import YouTube
+from pytubefix import YouTube
+from pytubefix.cli import on_progress
 from pytube.innertube import _default_clients
 from pytube import cipher
 import re
@@ -45,7 +46,6 @@ cipher.get_throttling_function_name = get_throttling_function_name
 
 import pytube
 import ffmpeg
-from pytube import YouTube
 import os
 import subprocess
 import json
@@ -182,7 +182,12 @@ def list_available_resolutions(url):
     except Exception as e:
         try:
             print(f"Hbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb  {e}")
-            return list_available_resolutions_for_restricted_content(url)
+            #return list_available_resolutions_for_restricted_content(url)
+            return {
+              "status" : False,
+              "message": str(e)
+
+            }
             
         except Exception as e:
             return {
