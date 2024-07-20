@@ -78,7 +78,7 @@ def delete30minutesOldFiles():
         print("In delete_mp4_files_in_current_directory")
 
         current_directory = "/usr/src/app"
-        max_age = 2 * 60  
+        max_age = 8 * 60  
 
         now = time.time()
         for filename in os.listdir(current_directory):
