@@ -130,7 +130,7 @@ def bytes_to_mb(size_in_bytes):
     
 def list_available_resolutions(url):
     try:      
-        yt = YouTube(url)
+        yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
         streams = yt.streams.filter(file_extension='mp4').order_by('resolution')
         resolution_details = {}
         
