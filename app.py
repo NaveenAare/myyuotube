@@ -327,7 +327,7 @@ def download_audio(url, filename):
 def download_video_which_doesnt_have_audio(url, filename, quality):
     try:
         print("in without audio")
-        yt = YouTube(url)
+        yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
         #video_stream = yt.streams.filter(res="1080p", mime_type="video/mp4", progressive=False).first()
         video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
         video_filename = f"{filename}_video.mp4"
@@ -338,19 +338,7 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         output_filename = f"{filename}_{quality}.mp4"
         checkFileExistence(output_filename)
         ffmpeg_command = f"ffmpeg -i {video_filename} -i {audio_filename} -c:v copy -c:a aac {output_filename}"
-
-        #video_clip = VideoFileClip(video_filename)
-        #audio_clip = AudioFileClip(audio_filename)
-
-        #final_clip = video_clip.set_audio(audio_clip)
-
-        #final_clip.write_videofile(output_filename, codec="libx264", audio_codec="aac")
-        #os.remove(video_filename)
-        #os.remove(audio_filename)
-
-
-
-        result = subprocess.run(ffmpeg_command, '--cookies', cookies_file, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        result = subprocess.run(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         if result.returncode == 0:
             print("FFmpeg command executed successfully")
@@ -683,8 +671,8 @@ def downloadFullHd():
                 print("has audio" + str(hasAudio))
                 fileLink = download_video(token, clean_string(name) + ".mp4", res)
             else:
-                fileLink = download_video(token, clean_string(name) + ".mp4", res)
-                #fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
+                #fileLink = download_video(token, clean_string(name) + ".mp4", res)
+                fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
         else:
             if(str(hasAudio) == "true"):
                 fileLink = dowload_age_restricted_videos(token, int(format_id), clean_string(name) + ".mp4")
