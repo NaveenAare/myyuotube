@@ -77,8 +77,8 @@ def delete30minutesOldFiles():
     try:
         print("In delete_mp4_files_in_current_directory")
 
-        current_directory = os.getcwd()
-        max_age = 5 * 60  # 30 minutes in seconds
+        current_directory = "/usr/src/app"
+        max_age = 2 * 60  
 
         now = time.time()
         for filename in os.listdir(current_directory):
@@ -809,9 +809,14 @@ def mainterms():
 def contactus():
     return render_template('contactus.html')
 
+@application.route("/deletevideos", methods=['GET'])
+def deletevideos():
+    delete30minutesOldFiles()
+    return "deleted"
+
 
 if __name__ == "__main__":
-    scheduler.add_job(id='Scheduled Task', func=delete30minutesOldFiles, trigger='interval', minutes=30)
+    scheduler.add_job(id='Scheduled Task', func=delete30minutesOldFiles, trigger='interval', minutes=1)
     scheduler.start()
     application.debug = True
     application.run()
