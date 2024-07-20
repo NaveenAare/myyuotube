@@ -6,7 +6,6 @@ from pytube import cipher
 import re
 
 # Set up logging
-logging.basicConfig(level=logging.DEBUG)
 
 _default_clients["ANDROID"]["context"]["client"]["clientVersion"] = "19.08.35"
 _default_clients["IOS"]["context"]["client"]["clientVersion"] = "19.08.35"
@@ -96,7 +95,7 @@ def delete30minutesOldFiles():
 
 #delete30minutesOldFiles()
 def download_video(url, video_filename, quality):
-    yt = YouTube(url)
+    yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
     video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
     video_stream.download(filename=video_filename)
     return video_filename
@@ -684,7 +683,8 @@ def downloadFullHd():
                 print("has audio" + str(hasAudio))
                 fileLink = download_video(token, clean_string(name) + ".mp4", res)
             else:
-                fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
+                fileLink = download_video(token, clean_string(name) + ".mp4", res)
+                #fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
         else:
             if(str(hasAudio) == "true"):
                 fileLink = dowload_age_restricted_videos(token, int(format_id), clean_string(name) + ".mp4")
