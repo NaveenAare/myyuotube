@@ -11,5 +11,6 @@ pytube==15.0.0
 pytz==2024.1
 yt-dlp
 ffmpeg
+pytubefix
 
 
