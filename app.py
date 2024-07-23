@@ -316,7 +316,7 @@ def dowload_ag_restrcited_videos(url):
 
 def download_audio(url, filename):
     try:
-        yt = YouTube(url)
+        yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
         audio_stream = yt.streams.filter(only_audio=True).first()
         audio_filename = f"{filename}_audio.mp3"
         audio_stream.download(filename=audio_filename)
