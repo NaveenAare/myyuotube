@@ -756,7 +756,8 @@ def getSitemap():
 
 @application.route("/", methods=['GET'])
 def main():
-    return render_template('youtubedowloader1.html')
+    return render_template('adsense.html')
+    #return render_template('youtubedowloader1.html')
 
 @application.route("/download-mp3", methods=['GET'])
 def mainaudio():
