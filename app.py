@@ -82,7 +82,7 @@ def delete30minutesOldFiles():
 
         now = time.time()
         for filename in os.listdir(current_directory):
-            if filename.endswith(".mp4"):
+            if filename.endswith(".mp4" ):
                 file_path = os.path.join(current_directory, filename)
                 if os.path.isfile(file_path):
                     file_creation_time = os.path.getctime(file_path)
@@ -98,7 +98,7 @@ def download_video(url, video_filename, quality):
     yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
     video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
     video_stream.download(filename=video_filename)
-    return video_filename
+    return video_filename + ".mp4"
     
 
 def checkFileExistence(filename):
@@ -318,9 +318,9 @@ def download_audio(url, filename):
     try:
         yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
         audio_stream = yt.streams.filter(only_audio=True).first()
-        audio_filename = f"{filename}_audio.mp3"
+        audio_filename = f"{filename}_audio"
         audio_stream.download(filename=audio_filename)
-        return audio_filename
+        return audio_filename + ".m4a"
     except:
         return ""
 
@@ -330,14 +330,14 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
         #video_stream = yt.streams.filter(res="1080p", mime_type="video/mp4", progressive=False).first()
         video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
-        video_filename = f"{filename}_video.mp4"
+        video_filename = f"{filename}_video"
         video_stream.download(filename=video_filename)
         audio_stream = yt.streams.filter(only_audio=True).first()
-        audio_filename = f"{filename}_audio.mp4"
+        audio_filename = f"{filename}_audio"
         audio_stream.download(filename=audio_filename)
         output_filename = f"{filename}_{quality}.mp4"
         checkFileExistence(output_filename)
-        ffmpeg_command = f"ffmpeg -i {video_filename} -i {audio_filename} -c:v copy -c:a aac {output_filename}"
+        ffmpeg_command = f"ffmpeg -i {video_filename}.mp4 -i {audio_filename}.m4a -c:v copy -c:a aac {output_filename}"
         result = subprocess.run(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         if result.returncode == 0:
@@ -669,7 +669,7 @@ def downloadFullHd():
         if(format_id == None or format_id == 'null'):
             if(str(hasAudio) == "true"):
                 print("has audio" + str(hasAudio))
-                fileLink = download_video(token, clean_string(name) + ".mp4", res)
+                fileLink = download_video(token, clean_string(name), res)
             else:
                 #fileLink = download_video(token, clean_string(name) + ".mp4", res)
                 fileLink = download_video_which_doesnt_have_audio(token, clean_string(name), str(res))
@@ -756,8 +756,8 @@ def getSitemap():
 
 @application.route("/", methods=['GET'])
 def main():
-    return render_template('adsense.html')
-    #return render_template('youtubedowloader1.html')
+    #return render_template('adsense.html')
+    return render_template('youtubedowloader1.html')
 
 @application.route("/download-mp3", methods=['GET'])
 def mainaudio():
