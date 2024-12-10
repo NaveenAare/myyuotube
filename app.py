@@ -97,7 +97,7 @@ def delete30minutesOldFiles():
 def download_video(url, video_filename, quality):
     yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
     video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
-    video_stream.download(filename=video_filename)
+    video_stream.download(filename=video_filename + ".mp4")
     return video_filename + ".mp4"
     
 
@@ -330,14 +330,14 @@ def download_video_which_doesnt_have_audio(url, filename, quality):
         yt = YouTube(url, use_oauth=True, allow_oauth_cache=True)
         #video_stream = yt.streams.filter(res="1080p", mime_type="video/mp4", progressive=False).first()
         video_stream = yt.streams.filter(res=quality, mime_type="video/mp4", progressive=False).first()
-        video_filename = f"{filename}_video"
+        video_filename = f"{filename}_video.mp4"
         video_stream.download(filename=video_filename)
         audio_stream = yt.streams.filter(only_audio=True).first()
-        audio_filename = f"{filename}_audio"
+        audio_filename = f"{filename}_audio.mp3"
         audio_stream.download(filename=audio_filename)
         output_filename = f"{filename}_{quality}.mp4"
         checkFileExistence(output_filename)
-        ffmpeg_command = f"ffmpeg -i {video_filename}.mp4 -i {audio_filename}.m4a -c:v copy -c:a aac {output_filename}"
+        ffmpeg_command = f"ffmpeg -i {video_filename} -i {audio_filename} -c:v copy -c:a aac {output_filename}"
         result = subprocess.run(ffmpeg_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         if result.returncode == 0:
