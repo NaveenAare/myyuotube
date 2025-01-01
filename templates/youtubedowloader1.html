@@ -1227,6 +1227,128 @@ nav ul li a:hover {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Apply box-shadow on hover */
 }
  
+
+  .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      position: relative;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 500px;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slider img {
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      z-index: 10;
+      border-radius: 50%;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    .visit-site {
+      margin-top: 350px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .visit-site:hover {
+      background-color: #0056b3;
+    }
+
+    @media screen and (max-width: 768px) {
+      .popup-content {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: calc(90% - 20px);
+      }
+
+      .slider-container {
+        height: 300px;
+      }
+
+      .slider img {
+        margin-right: 10px;
+        height: 300px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .slider-container {
+        height: 300px;
+      }
+
+      .slider img {
+        height: 250px;
+      }
+
+      .visit-site {
+        padding: 8px 15px;
+      }
+    }
+
+
 </style>
 </head>
 <body>
@@ -1293,7 +1415,20 @@ nav ul li a:hover {
   <h2 id="videoTitle">Video Title</h2>
 </div>
 
-
+<div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <div class="slider-container">
+        <div class="slider" id="slider">
+          <img src="https://firebasestorage.googleapis.com/v0/b/videos-downloader-13024.appspot.com/o/Screenshot%20from%202025-01-01%2014-54-24.png?alt=media&token=19b7ed5e-97d7-44c0-9a92-c594df2c86b7" alt="Image 1" />
+          <img src="https://firebasestorage.googleapis.com/v0/b/videos-downloader-13024.appspot.com/o/20241212_142506_132091_%2FScreenshot%20from%202025-01-01%2015-05-13.png?alt=media&token=4ff06b24-9975-4eae-b05e-97b53c54e863" alt="Image 2" />
+        </div>
+        <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
+      </div>
+      <a href="https://speakingcharacter.ai" class="visit-site" target="_blank">Visit Site</a>
+    </div>
+  </div>
 
 
 <!-- <div id="textBox" onclick="simulateDownloadss()">Click Me!</div> -->
@@ -1699,8 +1834,26 @@ function updateProgressBar(percentage) {
 
 // Example usage:
 // Update the progress bar to 30%
+    let slideIndex = 0;
 
+    function showPopup() {
+      document.getElementById('popup').style.display = 'flex';
+    }
 
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function moveSlide(step) {
+      const slider = document.getElementById('slider');
+      const slides = document.querySelectorAll('#slider img');
+      slideIndex += step;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      if (slideIndex >= slides.length) slideIndex = 0;
+      slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+
+    showPopup();
 
 // Function to update circular progress bar
 function setCircleProgress(percentage) {
