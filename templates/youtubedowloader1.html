@@ -1349,53 +1349,55 @@ nav ul li a:hover {
     }
 
 .sale-banner {
-      background-color: #808080;
-      color: #FFF;
-      padding: 10px 20px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: bold;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    background-color: #808080;
+    color: #FFF;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    }
+  .sale-banner span {
+    margin-bottom: 5px;
+  }
 
-    .sale-banner span {
-      margin-right: 10px;
+  .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    background: none;
+    border: none;
+    color: #000;
+  }
+
+  @media (max-width: 600px) {
+    .sale-banner {
+      font-size: 14px;
+      padding: 8px 10px;
     }
 
     .close-btn {
-      position: absolute;
-      right: 20px;
-      font-size: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      background: none;
-      border: none;
-      color: #000;
+      right: 10px;
+      top: 8px;
     }
+  }
 
-    @media (max-width: 600px) {
-      .sale-banner {
-        font-size: 14px;
-        padding: 8px 10px;
-      }
-
-      .close-btn {
-        right: 10px;
-      }
-    }
-
-    .sale-banner a {
-  color: white;
-  text-decoration: none;
-}
+  .sale-banner a {
+    color: white;
+    text-decoration: none;
+    margin: 0 6px;
+  }
 
 </style>
 </head>
@@ -1406,12 +1408,22 @@ nav ul li a:hover {
 
 
 <div class="sale-banner" id="saleBanner">
-    <span>🚨 This website is for sale. Interested? Contact : <a href="mailto:ytbvideosdownloader@gmail.com"> ytbvideosdownloader@gmail.com</a></span>
-    <button class="close-btn" onclick="document.getElementById('saleBanner').style.display='none'">×</button>
-  </div>
+  <span>🚨 This website is for sale. Interested? Contact: 
+    <a href="mailto:ytbvideosdownloader@gmail.com">ytbvideosdownloader@gmail.com</a>
+  </span>
+  <span>
+    📊 See analytics: 
+    <a href="https://firebasestorage.googleapis.com/v0/b/videos-downloader-13024.appspot.com/o/google_analytics.png?alt=media&token=84b40057-8104-4bda-8b02-d157fcf4abab" target="_blank">Google Analytics</a> | 
+    <a href="https://firebasestorage.googleapis.com/v0/b/videos-downloader-13024.appspot.com/o/analytics_page.png?alt=media&token=c1d875d2-8b13-4432-939d-4399384c4763" target="_blank">Search Console</a>
+  </span>
+  <button class="close-btn" onclick="document.getElementById('saleBanner').style.display='none'">×</button>
+</div>
 
 
-<h1 style="padding: 20px;">YouTube Video Downloader - 1080p, MP4, MP3, 4K for Free</h1>
+
+
+
+<h1 style="padding: 50px;">YouTube Video Downloader - 1080p, MP4, MP3, 4K for Free</h1>
 
 
 
