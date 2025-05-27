@@ -1348,6 +1348,54 @@ nav ul li a:hover {
       }
     }
 
+.sale-banner {
+      background-color: #808080;
+      color: #FFF;
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .sale-banner span {
+      margin-right: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      background: none;
+      border: none;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .sale-banner {
+        font-size: 14px;
+        padding: 8px 10px;
+      }
+
+      .close-btn {
+        right: 10px;
+      }
+    }
+
+    .sale-banner a {
+  color: white;
+  text-decoration: none;
+}
 
 </style>
 </head>
@@ -1357,10 +1405,13 @@ nav ul li a:hover {
 
 
 
+<div class="sale-banner" id="saleBanner">
+    <span>🚨 This website is for sale. Interested? Contact : <a href="mailto:ytbvideosdownloader@gmail.com"> ytbvideosdownloader@gmail.com</a></span>
+    <button class="close-btn" onclick="document.getElementById('saleBanner').style.display='none'">×</button>
+  </div>
 
 
-
-<h1>YouTube Video Downloader - 1080p, MP4, MP3, 4K for Free</h1>
+<h1 style="padding: 20px;">YouTube Video Downloader - 1080p, MP4, MP3, 4K for Free</h1>
 
 
 
@@ -1936,7 +1987,7 @@ function startDownload(resolution) {
 
 document.getElementById('downloadBtn').addEventListener('click', function() {
 
-    window.open('https://chatezzy.com/', '_blank');
+    //window.open('https://chatezzy.com/', '_blank');
   
 
   showLoadingDots()
